@@ -66,11 +66,7 @@ module.exports = {
         }
       },
      
-      { // 样式加载器
-          test:/\.css$/, 
-          loader:['style-loader','css-loader']
-      },
-
+  
        
       {// sass编译加载器
           test:/\.scss$/,
