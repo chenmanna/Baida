@@ -1,0 +1,10 @@
+
+ul{
+    list-style: none;
+}
+@function rem($px){
+    @return $px / 75px * 1rem;
+}
+li{
+	list-style: none;
+}
