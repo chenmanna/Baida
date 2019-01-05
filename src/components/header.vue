@@ -13,6 +13,8 @@ export default {
       width: 100%;
       height: rem(88px);
       background: #ccc;
+      font-size: rem(30px);
+      color: #58bc58;
   }
 </style>
 <!--   @import "../styles/base.scss"; -->
