@@ -9,6 +9,10 @@ import MintUI from "mint-ui";
 Vue.use(MintUI);
 import "mint-ui/lib/style.css";
 
+// 引入axios  
+import  Axios from 'axios'
+Vue.prototype.$axios=Axios
+
 // 字体图标
 import "./font/iconfont.css"
 Vue.config.productionTip = false
