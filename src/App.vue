@@ -1,12 +1,6 @@
 <template>
   <div id="app">
     <router-view/>
-    <!-- <mt-tabbar :selected.sync="selected">
-      <mt-tab-item :id="tab.name" v-for="tab in tabs" :key="tab.name" @click.native="goto(tab.name)">
-        <img slot="icon" src="../assets/100x100.png">
-        我的
-      </mt-tab-item>
-    </mt-tabbar> -->
     <mt-tabbar v-model="selected" id="tabbar">
       <mt-tab-item :id="tab.name" v-for="tab in tabs" :key="tab.name" @click.native="goto(tab.path)">
         <div :class="tab.icon" id="icon"></div>
@@ -51,7 +45,7 @@ export default {
     goto(path){
       this.$router.push({path});
     }
-  }
+  } 
  
 }
 </script>
@@ -59,5 +53,10 @@ export default {
   html,body{
     margin: 0;
     padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+  #app{
+    height: 100%;
   }
 </style>

@@ -11,11 +11,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: { 
-        '/baida':{ //小暗号
-            target:'https://m.bd-ego.com/',//目标服务器
-            changeOrigin:true,//是否允许代理
-            pathRewrite:{'^/baida':''}// 匹配请求接口
-        }
+        // '/baida':{ //小暗号
+        //     target:'https://m.bd-ego.com/',//目标服务器
+        //     changeOrigin:true,//是否允许代理
+        //     pathRewrite:{'^/baida':''}// 匹配请求接口
+        // }
     },
 
     // Various Dev Server settings
