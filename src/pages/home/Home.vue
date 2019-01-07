@@ -2,18 +2,24 @@
   <div class="home">
     <Header />
     <Banner />
+    <ConBanner />
+    <PosterImg />
   </div>
 </template>
 
 <script>
 import Header from './header/Header.vue';
 import Banner from './Banner.vue';
+import ConBanner from './ConBanner.vue';
+import PosterImg from './PosterImg.vue'
 
 export default {
   name: 'Home',
   components: { 
     Header,
-    Banner
+    Banner,
+    ConBanner,
+    PosterImg
   },
 }
 </script>

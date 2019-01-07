@@ -36,9 +36,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 .header {
+  position: fixed;
+  top: 0;
   width: 100%;
   height: rem(88px);
   font-size: 0;
+  z-index: 999;
+  background: #fff;
   div{
     float: left;
     img{

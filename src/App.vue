@@ -59,4 +59,7 @@ export default {
   #app{
     height: 100%;
   }
+  #tabbar{
+    position: fixed;
+  }
 </style>

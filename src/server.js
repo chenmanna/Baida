@@ -5,8 +5,9 @@ var app = express();
 
 var apiProxy = '/proxy/';
 var apiMap = {
-    HomeBanner:"/bd-marketing/api/channel/getNewHeadPageData",
-    Logo:"/bd-content/api/advertlocation/getAdvertLocal"
+    HomeBanner: "/bd-marketing/api/channel/getNewHeadPageData",
+    Logo: "/bd-content/api/advertlocation/getAdvertLocal",
+    ConBanner: "/bd-marketing/api/activity/querySeckillActivity" 
 }
 app.get(apiProxy + "*",(req,res)=>{
         // cors
@@ -21,10 +22,15 @@ app.get(apiProxy + "*",(req,res)=>{
         }
         var url = 'https://m.bd-ego.com/' + apiMap[api] + data;
         // console.log('11111111111111111',url)
+        console.log(2,url);
         request.get(url,(err,response,body)=>{
             res.send(body);
+            console.log(1,url);
         })
     })
 app.listen("2999",()=>{
     console.log(2999);
 })
+
+
+// https://m.bd-ego.com/bd-marketing/api/activity/querySeckillActivity?activityId=1706230925400028&_t=1546839897752
