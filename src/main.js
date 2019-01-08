@@ -9,6 +9,9 @@ import MintUI from "mint-ui";
 Vue.use(MintUI);
 import "mint-ui/lib/style.css";
 
+import { InfiniteScroll } from 'mint-ui';
+Vue.use(InfiniteScroll);
+
 // 引入axios  
 import  Axios from 'axios'
 Vue.prototype.$axios=Axios

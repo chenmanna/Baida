@@ -7,7 +7,8 @@ var apiProxy = '/proxy/';
 var apiMap = {
     HomeBanner: "/bd-marketing/api/channel/getNewHeadPageData",
     Logo: "/bd-content/api/advertlocation/getAdvertLocal",
-    ConBanner: "/bd-marketing/api/activity/querySeckillActivity" 
+    ConBanner: "/bd-marketing/api/activity/querySeckillActivity",
+    HomeImgList: "/bd-marketing/api/activity/getProductList"
 }
 app.get(apiProxy + "*",(req,res)=>{
         // cors
@@ -34,3 +35,4 @@ app.listen("2999",()=>{
 
 
 // https://m.bd-ego.com/bd-marketing/api/activity/querySeckillActivity?activityId=1706230925400028&_t=1546839897752
+// https://m.bd-ego.com/bd-marketing/api/activity/getProductList?activityId=1701031131360001&startNum=0&_t=1546859442537 goods

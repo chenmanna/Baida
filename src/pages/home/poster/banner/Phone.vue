@@ -1,12 +1,11 @@
 <template>
-    <div class="conBanner">
+    <div class="phone">
         <div class="imgBox">
             <ul>
                 <li v-for="(item,index) in imgList" :key="index">
-                    <img :src="item.pLogo" alt="">
-                    <p class="title">{{item.pName}}</p>
-                    <p class="actPrice">￥{{item.actPrice}}</p>
-                    <p class="referPrice">￥{{item.referPrice}}</p>
+                    <img :src="item.itemLogoUrl" alt="">
+                    <p class="title">{{item.itemTitle}}</p>
+                    <p class="actPrice">￥{{item.salePrice}}</p>
                 </li>
             </ul>
         </div>
@@ -14,18 +13,18 @@
 </template>
 <script>
 export default {
-    name: 'ConBanner',
+    name: 'Phone',
     data(){
         return {
             imgList: []
         }
     },
     created(){
-        // https://m.bd-ego.com/bd-marketing/api/channel/getNewHeadPageData?_t=1546839897557
-         var time = (new Date()).valueOf();
-        this.$axios.get(`http://localhost:2999/proxy/ConBanner?activityId=1706230925400028&_t=${time}`).then((res)=>{
-            // console.log(res.data.data.list);
+// https://m.bd-ego.com/bd-marketing/api/activity/getProductList?startNum=0&activityId=1809050926590073&_t=1546935022328         
+        var time = (new Date()).valueOf();
+        this.$axios.get(`http://localhost:2999/proxy/HomeImgList?startNum=0&activityId=1811160844360071&_t=${time}`).then((res)=>{
             this.imgList = res.data.data.list
+            // console.log(res.data.data.list);
         })
         .catch((err)=>{
             console.log(err);
@@ -34,17 +33,17 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-    .conBanner{
-        height: rem(438px);
+    .phone{
+        height: rem(356px);
         .imgBox{
             width: rem(750px);
-            height: rem(438px);
+            height: rem(356px);
             overflow-x:scroll;
             ul{
-                height: rem(438px);
+                height: rem(356px);
                 overflow-x:scroll; 
                 margin: 0;
-                width: rem(9850px);
+                width: rem(2390px);
                 overflow-y: hidden;
                 padding: 0;
                 white-space: nowrap;
@@ -52,8 +51,8 @@ export default {
                 li{
                     float: left;
                     width: rem(230px);
-                    height: rem(357px);
-                    margin: rem(25px);
+                    height: rem(337px);
+                    margin-left: rem(25px);
                     img{
                         width: rem(190px);
                         height: rem(190px);
@@ -65,9 +64,6 @@ export default {
                     p{
                         padding: rem(10px);
                         font-size: rem(12px);
-                    }
-                    .referPrice{
-                        text-decoration: line-through;
                         color: #999;
                     }
                     .actPrice{

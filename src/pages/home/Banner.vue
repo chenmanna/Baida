@@ -30,13 +30,15 @@ export default {
             textImg: {},
             listimg: {},
             gifImg: {},
-            saleTime: {}
+            saleTime: {},
+            datalist: []
         }
     },
     created(){
         var time = (new Date()).valueOf();
         this.$axios.get(`http://localhost:2999/proxy/HomeBanner?_t=${time}`).then((res)=>{
             var data =  res.data.data;
+            this.datalist = data;
             this.banner = data.list[0].list;
 
             var t_img = data.list[1].list;
@@ -56,10 +58,9 @@ export default {
             }
 
             this.saleTime = data.list[7];
-            console.log(this.saleTime);
-
-            console.log(this.gifImg);
-            console.log(data);
+            // console.log(this.saleTime);
+            // console.log(this.gifImg);
+            // console.log(data);
         })
         .catch((err)=>{
             console.log(err);

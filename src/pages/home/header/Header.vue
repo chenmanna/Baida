@@ -9,7 +9,7 @@
       <span class="iconfont icon-shanchuguanbicha2"></span>
     </div>
     <div>
-      <img :src="data.imageUrl" alt="">
+      <img src="https://img.allpyra.com/b39fb51b-1193-4142-8553-18eb0e63c818.png" alt="">
     </div>
     </div>
 </template>
@@ -21,17 +21,17 @@ export default {
       data: {}
     }
   },
-  created(){
-    var time = (new Date()).valueOf();
-    this.$axios.get(`http://localhost:2999/proxy/Logo?showType=4&_t=${time}`).then((res)=>{
-        this.data = res.data.data;
-        console.log(this.data);
-        console.log(res);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }
+  // created(){
+  //   var time = (new Date()).valueOf();
+  //   this.$axios.get(`http://localhost:2999/proxy/Logo?showType=4&_t=${time}`).then((res)=>{
+  //       this.data = res.data.data;
+  //       console.log(this.data);
+  //       console.log(res);
+  //   })
+  //   .catch((err)=>{
+  //     console.log(err);
+  //   })
+  // }
 };
 </script>
 <style lang="scss" scoped>

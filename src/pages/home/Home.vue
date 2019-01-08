@@ -4,6 +4,7 @@
     <Banner />
     <ConBanner />
     <PosterImg />
+    <GoodsList />
   </div>
 </template>
 
@@ -11,7 +12,9 @@
 import Header from './header/Header.vue';
 import Banner from './Banner.vue';
 import ConBanner from './ConBanner.vue';
-import PosterImg from './PosterImg.vue'
+import PosterImg from './poster/PosterImg.vue'
+import GoodsList from './GoodsList.vue'
+
 
 export default {
   name: 'Home',
@@ -19,7 +22,8 @@ export default {
     Header,
     Banner,
     ConBanner,
-    PosterImg
+    PosterImg,
+    GoodsList
   },
 }
 </script>
