@@ -8,7 +8,8 @@ var apiMap = {
     HomeBanner: "/bd-marketing/api/channel/getNewHeadPageData",
     Logo: "/bd-content/api/advertlocation/getAdvertLocal",
     ConBanner: "/bd-marketing/api/activity/querySeckillActivity",
-    HomeImgList: "/bd-marketing/api/activity/getProductList"
+    HomeImgList: "/bd-marketing/api/activity/getProductList",
+    Goodsdetails: "/bd-product/api/item/itemDetail"
 }
 app.get(apiProxy + "*",(req,res)=>{
         // cors

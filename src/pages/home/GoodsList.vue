@@ -3,105 +3,108 @@
         <div class="text">热门商品</div>
         <ul
             v-infinite-scroll="loadMore"
-            infinite-scroll-disabled="loading"
             infinite-scroll-distance="10"
         >
-            <li v-for="(item,index) in goodslist" :key="index">
-                <img src="" alt="">
-                <p>{{item.brandId}}</p>
-                <span class="floatleft">price</span>
-                <span class="floatright">dizi</span>
+            <li v-for="(item,index) in goodslist" :key="index" @click="goGoodslist(item.itemCode)">
+                <img :src="item.itemLogoUrl" alt="">
+                <p>{{item.itemTitle}}</p>
+                <span class="floatleft">￥{{item.salePrice}}</span>
+                <span class="floatright">{{item.country}}</span>
             </li>
         </ul>
     </div>
 </template>
 <script>
+// import Vue from 'vue';
+// import { InfiniteScroll } from 'mint-ui';
+
+// Vue.use(InfiniteScroll);
 export default {
     name: 'GoodsList',
     data(){
         return {
             goodslist: [],
-            loading: false,
-            qty: 0
+            qty: 0,
+            
 
         }
     },
     methods:{
-        // loadMore() {
-        //     this.loading = true;
-        //     setTimeout(() => {
-        //         let last = this.list[this.list.length - 1];
-        //         for (let i = 1; i <= 10; i++) {
-        //         this.list.push(last + i);
-        //         }
-        //         this.loading = false;
-        //     }, 2500);
         // }  https://m.bd-ego.com/bd-marketing/api/activity/getProductList?activityId=1701031131360001&startNum=0&_t=1546948126220
          loadMore() {
-            this.loading = true;
+            console.log("触发滚动");
+            if(this.qty==150){
+                return false;
+            }
             var time = (new Date()).valueOf();
-            this.$axios.get(`http://localhost:2999/proxy/HomeImgList?activityId=1701031131360001&startNum=${this.qty}&_t=${time}`)
+            console.log(this.qty);
+            this.$axios.get(`http://localhost:2999/proxy/HomeImgList?activityId=1701031131360001&startNum=${this.qty}`)
             .then((res)=>{
-                // console.log(res);
-                // var goodsdata = res.data.data.list;
-                this.goodslist = this.goodslist.concat(res.data.data.list);
-                // console.log(a);
                 this.qty += 10;
-                // console.log(goodsdata);
-                this.loading = false;
+                this.goodslist = this.goodslist.concat(res.data.data.list);
+                console.log(this.goodslist);
+                console.log(this.qty);
             })
             .catch((err)=>{
-                this.loading = false;
                 console.log(err);
             })
-            // setTimeout(() => {
-            //     let last = this.list[this.list.length - 1];
-            //     for (let i = 1; i <= 10; i++) {
-            //     this.list.push(last + i);
-            //     }
-            //     this.loading = false;
-            // }, 2500);
+        },
+        goGoodslist(id){
+            // this.$router.push({name: 'GoodsDetails',params: {currentId: id}})
+            // this.$router.push({name: 'goodsDetails',query: {currentId: id}})
+            this.$router.push({path:'/goodsDetails/'+id})
+
         }
     },
     created(){
-        this.loadMore();
     }
 }
 </script>
 <style lang="scss" scoped>
     .goodslist{
         width: 100%;
-        // height: 100px;
         margin-bottom : rem(84px);
-        // background: red;
         font-size: rem(14px);
         div{
             padding: rem(23px);
             border: 1px solid #ccc;
         }
         ul{
-            width: rem(374px);
-            height: rem(533px);
+            width: rem(750px);
+            overflow-y:auto;
+            max-height: 100vh;//与屏幕一样高度  %只能加载一次
             li{
-                padding: rem(40px);
+                width: rem(370.5px);
+                height: rem(550px);
                 float: left;
-                border: 1px solid #999;
+                border: 1px solid #f4f4f4;
                 img{
+                    margin: rem(40px);
                     width: rem(272px);
                     height: rem(272px);
                     margin-bottom: rem(20px);
-                    p{
-                        color: #666;
-                        margin-bottom: rem(20px);
-                        .floatleft{
-                            float: left;
-                            color: #e72714;
-                        }
-                        .floatright{
-                            float: right;
-                            color: #666;
-                        }
-                    }
+                }
+                p{
+                    margin: rem(35px);
+                    width: rem(300px);
+                    overflow: hidden;
+                    font-size: rem(12px);
+                    color: #666;
+                    margin-bottom: rem(20px);
+                }
+                span{
+                    margin-bottom: rem(40px);
+
+                }
+                .floatleft{
+                    padding-left: rem(40px);
+                    float: left;
+                    color: #e72714;
+                }
+                .floatright{
+                    padding-right: rem(40px);
+                    float: right;
+                    color: #666;
                 }
             }
         }

@@ -12,8 +12,8 @@
 import Header from './header/Header.vue';
 import Banner from './Banner.vue';
 import ConBanner from './ConBanner.vue';
-import PosterImg from './poster/PosterImg.vue'
-import GoodsList from './GoodsList.vue'
+import PosterImg from './poster/PosterImg.vue';
+import GoodsList from './GoodsList.vue';
 
 
 export default {

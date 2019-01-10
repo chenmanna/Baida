@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
-    <mt-tabbar v-model="selected" id="tabbar">
+    <mt-tabbar v-model="selected" id="tabbar" v-if="$store.state.navShow">
       <mt-tab-item :id="tab.name" v-for="tab in tabs" :key="tab.name" @click.native="goto(tab.path)">
         <div :class="tab.icon" id="icon"></div>
         {{tab.text}}
@@ -11,6 +11,31 @@
 </template>
 
 <script>
+// let bus = new Vue;
+import axios from 'axios'
+import { Indicator } from 'mint-ui';
+// 请求拦截显示Indicator
+axios.interceptors.request.use(config => {
+    Indicator.open({
+      spinnerType: 'fading-circle'
+    });
+  // console.log('config:',config);
+  // config.params.token = '10086';
+  return config
+}, error => {
+  Indicator.close();
+  return Promise.reject(error)
+})
+// http响应拦截器
+axios.interceptors.response.use(data => {
+  // 响应成功关闭loading
+  Indicator.close();
+  return data
+}, error => {
+  Indicator.close();
+  return Promise.reject(error)
+})
+
 export default {
   name: 'App',
   data(){
@@ -38,14 +63,23 @@ export default {
             name:'Mine'
           }
       ],
-      selected:'Home'
+      selected:'Home',
+      // isShow : true
     }
   },
   methods:{
     goto(path){
       this.$router.push({path});
+    },
+  },
+  created(){
+    // this.$store.state.navShow = true;
+    if(!this.$store.state.navShow){
+      this.$store.state.navShow = !this.$store.state.navShow;
     }
-  } 
+    
+  }
+
  
 }
 </script>
