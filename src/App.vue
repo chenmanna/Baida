@@ -72,11 +72,16 @@ export default {
       this.$router.push({path});
     },
   },
-  created(){
-    // this.$store.state.navShow = true;
+  beforeCreate(){
     if(!this.$store.state.navShow){
       this.$store.state.navShow = !this.$store.state.navShow;
     }
+  },
+  created(){
+    // this.$store.state.navShow = true;
+    // if(!this.$store.state.navShow){
+    //   this.$store.state.navShow = !this.$store.state.navShow;
+    // }
     
   }
 
