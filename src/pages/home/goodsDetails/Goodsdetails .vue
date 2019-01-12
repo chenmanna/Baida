@@ -2,7 +2,7 @@
     <div class="goodslist">
         <div>
             <div class="header"></div>
-            <div class="iconfont icon-icon_left"></div>
+            <div class="iconfont icon-icon_left" @click="goHome"></div>
             <div class="iconfont icon-icon-more"></div>
             <GoodsBanner />
         </div>
@@ -11,19 +11,24 @@
 <script>
 import GoodsBanner from "./GoodsBanner.vue";
 export default {
-    name: 'Goodslist',
+    name: 'GoodsDetails',
     components:{
         GoodsBanner
     },
     data(){
         return {}
     },
+    methods: {
+        goHome(){
+            this.$router.push("/home")
+        }
+    },
     created(){
         console.log(this.$route);
-        this.$store.state.navShow = false;
-        // this.$axios.get('')
-
-        
+        this.$store.state.navShow = false; 
+    },
+    beforeDestroy(){
+        this.$store.state.navShow = true; 
     }
 }
 </script>

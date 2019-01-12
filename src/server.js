@@ -6,10 +6,13 @@ var app = express();
 var apiProxy = '/proxy/';
 var apiMap = {
     HomeBanner: "/bd-marketing/api/channel/getNewHeadPageData",
-    Logo: "/bd-content/api/advertlocation/getAdvertLocal",
+    Logo: "/bd-content/api/advertlocation/getAdvertLocal",//请求超时
     ConBanner: "/bd-marketing/api/activity/querySeckillActivity",
     HomeImgList: "/bd-marketing/api/activity/getProductList",
-    Goodsdetails: "/bd-product/api/item/itemDetail"
+    Goodsdetails: "/bd-product/api/item/itemDetail",
+    GoodsdetailsBanner: "/bd-product/api/recommend/productRecommend",//请求数据不符合
+    Goodsdetailsimg: "/bd-product/api/item/itemGraphicDetail",
+    a: "/bd-product/api/categ/itemCategList"
 }
 app.get(apiProxy + "*",(req,res)=>{
         // cors
