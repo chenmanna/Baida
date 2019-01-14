@@ -15,10 +15,6 @@
     </div>
 </template>
 <script>
-// import Vue from 'vue';
-// import { InfiniteScroll } from 'mint-ui';
-
-// Vue.use(InfiniteScroll);
 export default {
     name: 'GoodsList',
     data(){
@@ -50,10 +46,7 @@ export default {
             })
         },
         goGoodslist(id){
-            // this.$router.push({name: 'GoodsDetails',params: {currentId: id}})
-            // this.$router.push({name: 'goodsDetails',query: {currentId: id}})
             this.$router.push({path:'/goodsDetails/'+id})
-
         }
     },
     created(){
@@ -67,12 +60,15 @@ export default {
         font-size: rem(14px);
         div{
             padding: rem(23px);
-            border: 1px solid #ccc;
+            border: 1px solid #f4f4f4;
+        }
+        .text{
+            text-align: left;
         }
         ul{
             width: rem(750px);
             overflow-y:auto;
-            max-height: 100vh;//与屏幕一样高度  %只能加载一次
+            max-height: 100vh;
             li{
                 width: rem(370.5px);
                 height: rem(550px);

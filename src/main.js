@@ -17,27 +17,7 @@ import "mint-ui/lib/style.css";
 // 无限滚动,数据加载
 import { InfiniteScroll} from 'mint-ui';
 Vue.use(InfiniteScroll);
-// import { Indicator } from 'mint-ui';
 
-// // 请求拦截显示Indicator
-// axios.interceptors.request.use(config => {
-//   Indicator.open();
-//   console.log('config:',config);
-//   // config.params.token = '10086';
-//   return config
-// }, error => {
-//   Indicator.close();
-//   return Promise.reject(error)
-// })
-// // http响应拦截器
-// axios.interceptors.response.use(data => {
-//   // 响应成功关闭loading
-//   Indicator.close();
-//   return data
-// }, error => {
-//   Indicator.close();
-//   return Promise.reject(error)
-// })
 
 
 // 字体图标

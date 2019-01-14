@@ -12,7 +12,6 @@ var apiMap = {
     Goodsdetails: "/bd-product/api/item/itemDetail",
     GoodsdetailsBanner: "/bd-product/api/recommend/productRecommend",//请求数据不符合
     Goodsdetailsimg: "/bd-product/api/item/itemGraphicDetail",
-    a: "/bd-product/api/categ/itemCategList"
 }
 app.get(apiProxy + "*",(req,res)=>{
         // cors
@@ -27,10 +26,9 @@ app.get(apiProxy + "*",(req,res)=>{
         }
         var url = 'https://m.bd-ego.com/' + apiMap[api] + data;
         // console.log('11111111111111111',url)
-        console.log(2,url);
         request.get(url,(err,response,body)=>{
             res.send(body);
-            console.log(1,url);
+            // console.log(1,url);
         })
     })
 app.listen("2999",()=>{

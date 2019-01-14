@@ -11,7 +11,7 @@
 </template>
 
 <script>
-// let bus = new Vue;
+
 import axios from 'axios'
 import { Indicator } from 'mint-ui';
 // 请求拦截显示Indicator
@@ -19,8 +19,6 @@ axios.interceptors.request.use(config => {
     Indicator.open({
       spinnerType: 'fading-circle'
     });
-  // console.log('config:',config);
-  // config.params.token = '10086';
   return config
 }, error => {
   Indicator.close();
@@ -64,7 +62,6 @@ export default {
           }
       ],
       selected:'Home',
-      // isShow : true
     }
   },
   methods:{
@@ -78,14 +75,8 @@ export default {
     }
   },
   created(){
-    // this.$store.state.navShow = true;
-    // if(!this.$store.state.navShow){
-    //   this.$store.state.navShow = !this.$store.state.navShow;
-    // }
-    
+    this.$store.state.navShow = true;
   }
-
- 
 }
 </script>
 <style>

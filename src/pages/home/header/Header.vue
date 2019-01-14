@@ -5,7 +5,7 @@
     </div>
     <div class="search">
       <span class="iconfont icon-sousuo"></span>
-      <input type="text">
+      <input type="text" placeholder="texts">
       <span class="iconfont icon-shanchuguanbicha2"></span>
     </div>
     <div>
@@ -18,9 +18,31 @@ export default {
   name: 'Header',
   data(){
     return {
-      data: {}
+      data: {
+        texts: "爱他美"
+      }
     }
   },
+  methods:{
+    carousel(){
+      var  list = [{name: "爱他美"},{name: "MK"},{name: "Coach"},{name:  "成人奶粉"},{name:"护手霜"},{name: "娇韵诗"},{name: "巧克力"},{name:  "Sony"},{name:  "UCC"},{name: "瑞士莲"}];
+      // for(var i=0;i<list.length;i++){
+          setInterval(()=>{
+            for(var i=0;i<list.length;i++){
+            this.texts = list[i].name;
+            console.log(this.texts)
+            console.log(list[i].name)
+            }
+          },1000)
+      // }
+    }
+  },
+  // update(){
+    // this.carousel();
+  // },
+  // created(){
+    // this.carousel();
+  // }
   // created(){
   //   var time = (new Date()).valueOf();
   //   this.$axios.get(`http://localhost:2999/proxy/Logo?showType=4&_t=${time}`).then((res)=>{
@@ -73,6 +95,7 @@ export default {
       border: 0 none;
       margin-right: rem(18px);
       background: #e5e5e5;
+      outline: none;
     }
   }
 }

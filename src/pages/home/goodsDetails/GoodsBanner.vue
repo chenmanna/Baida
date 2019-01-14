@@ -90,9 +90,9 @@
                 <div class="buyQty">
                     <div>购买数量</div>
                     <div class="num"> 
-                        <span>-</span>
-                        <span>1</span>
-                        <span>+</span>
+                        <span @click="reduce">-</span>
+                        <span>{{buynum}}</span>
+                        <span @click="add">+</span>
                     </div>
                 </div>
                 <div class="confirm">确定</div>
@@ -126,7 +126,8 @@
         bannerData: {},
         Img: true,
         text: false,
-        img: ''
+        img: '',
+        buynum: 1
       }
     },
     methods:{
@@ -203,6 +204,17 @@
             this.Img = false;
             this.text = true;
             console.log(this.Img,this.text);
+        },
+        reduce(){
+           
+            if(this.buynum<=1){
+                return false;
+            }
+             this.buynum--
+        },
+        add(){
+            this.buynum++
+
         }
     },
     created(){
@@ -243,7 +255,6 @@
       bottom: 0;
       left: 0;
       width: rem(750px);
-      height: rem(350px);
       background: #fff;
       transition: bottom linear 1s;
       .header {

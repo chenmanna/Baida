@@ -27,8 +27,17 @@ export default {
         console.log(this.$route);
         this.$store.state.navShow = false; 
     },
+    // beforeRouteLeave(to,from,next){
+    //      this.$store.commit('changeNavShow', true); 
+    //      next();
+    // },
+    // beforeEach(to,from,next){
+    //     this.$store.commit('changeNavShow', false);
+    //     next();
+    // }
     beforeDestroy(){
-        this.$store.state.navShow = true; 
+        this.$store.state.navShow = true;
+        this.$store.dispatch('changeNavShow', true); 
     }
 }
 </script>
@@ -36,7 +45,6 @@ export default {
     .goodslist{
         div{
             position: relative;
-            // text-align: center;
             .header{
                 height: rem(88px);
                 width: rem(750px);
@@ -68,16 +76,6 @@ export default {
                 text-align: center;
 
             }
-            // div{
-            //     .iconfont{
-            //         font-size: rem(30px);
-            //     }
-            //     span{
-            //         display: block;
-            //         width: rem(30px);
-            //         height: rem(30px);
-            //     }
-            // }
         }
     }
 </style>

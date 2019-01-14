@@ -10,11 +10,13 @@ export default  new Vuex.Store({
     },
     //getters类似于computed()
     getters: {
-        
+        getNavShow(){}
     },
     //mutations类似于methods，一般用于同步
     mutations: {
-        
+        changeNavShow(state, isShow) {
+            state.navShow = isShow;
+        }
     },
     //类似mutations,一般用于异步
     action:{
