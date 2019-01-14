@@ -18,6 +18,10 @@ import "mint-ui/lib/style.css";
 import { InfiniteScroll} from 'mint-ui';
 Vue.use(InfiniteScroll);
 
+//字体图标2
+import "./font2/iconfont.css"
+Vue.config.productionTip = false
+
 
 
 // 字体图标

@@ -12,6 +12,9 @@ var apiMap = {
     Goodsdetails: "/bd-product/api/item/itemDetail",
     GoodsdetailsBanner: "/bd-product/api/recommend/productRecommend",//请求数据不符合
     Goodsdetailsimg: "/bd-product/api/item/itemGraphicDetail",
+    Pinpai:"/bd-product/api/brand/getAllShowBrand",
+    Fenlei:"/bd-product/api/categ/itemCategList",
+    Liebiao:"/bd-product/api/categ/itemSecondCategList"
 }
 app.get(apiProxy + "*",(req,res)=>{
         // cors
