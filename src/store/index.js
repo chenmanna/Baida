@@ -9,7 +9,7 @@ export default  new Vuex.Store({
         navShow: true
     },
     //getters类似于computed()
-    getters: {
+    getters: { 
         getNavShow(){}
     },
     //mutations类似于methods，一般用于同步

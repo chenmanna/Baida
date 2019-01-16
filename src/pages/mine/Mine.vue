@@ -5,7 +5,8 @@
           <div class="mine-tx"><div></div><span class="mine-name">用户名</span></div>
           <div class="mine-laba">
             <!-- <span class="iconfont icon-laba"> -->
-              </span>小喇叭</div>
+              <!-- </span> -->
+              小喇叭</div>
 
          
     </div>

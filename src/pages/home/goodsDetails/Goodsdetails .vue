@@ -23,22 +23,27 @@ export default {
             this.$router.push("/home")
         }
     },
-    created(){
-        console.log(this.$route);
-        this.$store.state.navShow = false; 
-    },
-    // beforeRouteLeave(to,from,next){
-    //      this.$store.commit('changeNavShow', true); 
-    //      next();
+    // created(){
+    //     console.log(this.$route);
+    //     this.$store.state.navShow = false; 
     // },
-    // beforeEach(to,from,next){
-    //     this.$store.commit('changeNavShow', false);
-    //     next();
-    // }
-    beforeDestroy(){
-        this.$store.state.navShow = true;
-        this.$store.dispatch('changeNavShow', true); 
+    beforeRouteLeave(to,from,next){
+        // console.log(this.$store)
+         this.$store.commit('changeNavShow', true); 
+         next();
+         
+    },
+    beforeRouteEnter(to,from,next){
+        // this.$store.commit('changeNavShow', false);
+        // next();
+        next(vm => {
+            vm.$store.commit('changeNavShow', false);
+         })
     }
+    // beforeDestroy(){
+    //     this.$store.state.navShow = true;
+    //     this.$store.dispatch('changeNavShow', true); 
+    // }
 }
 </script>
 <style lang="scss" scoped>

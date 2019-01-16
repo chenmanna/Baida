@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-
 // 引入axios  
 import  axios from 'axios';
 Vue.prototype.$axios=axios;
