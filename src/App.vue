@@ -69,14 +69,14 @@ export default {
       this.$router.push({path});
     },
   },
-  beforeCreate(){
-    if(!this.$store.state.navShow){
-      this.$store.state.navShow = !this.$store.state.navShow;
-    }
-  },
-  created(){
-    this.$store.state.navShow = true;
-  }
+  // beforeCreate(){
+  //   if(!this.$store.state.navShow){
+  //     this.$store.state.navShow = !this.$store.state.navShow;
+  //   }
+  // },
+  // created(){
+  //   this.$store.state.navShow = true;
+  // }
 }
 </script>
 <style>

@@ -1,25 +1,28 @@
 <template>
   <div class="home">
     <Header />
-    <!-- <Banner />
+    <!-- <Banner /> 
     <ConBanner />
     <PosterImg />
     <GoodsList />  
     <ToTop /> -->
-    <HomeContent /> 
+    <HomeContent v-show="this.$store.state.isShowSearch"/> 
     <ToTop />
-  </div>
+  </div> 
 </template>
 
 <script>
 import Header from './header/Header.vue';
 import HomeContent from './HomeContent.vue';
-
 // import Banner from './Banner.vue';
 // import ConBanner from './ConBanner.vue';
 // import PosterImg from './poster/PosterImg.vue';
 // import GoodsList from './components/GoodsList.vue';
 import ToTop from './components/ToTop.vue';
+
+// 中间桥梁，
+import Vue from 'Vue';
+let bus = new Vue();
 
 
 export default {
@@ -33,6 +36,25 @@ export default {
     // GoodsList,
     ToTop
   },
+  data(){
+    return {
+      // showSearchPage: false, 
+      showCon: true
+    }
+  },
+  // methods:{
+  //   isShowPage() {
+  //     // this.hidden =! this.hidden;
+  //     // this.showSearchPage = true;
+  //     this.showCon = false;
+  //     console.log(this.hidden);
+  //   },
+  // },
+  // mounted(){
+  //   bus.$on('search',item=>{
+  //       this.isShowPage();
+  //   });
+  // }
   // data(){
   //   return {
   //     isShow: false

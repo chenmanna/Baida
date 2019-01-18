@@ -95,7 +95,7 @@
                         <span @click="add">+</span>
                     </div>
                 </div>
-                <div class="confirm">确定</div>
+                <div class="confirm" @click="addCar">确定</div>
                 <div class="quxiao" @click="close">&times;</div>
             </div>
         </div>
@@ -103,8 +103,8 @@
             <div>
                 <div class="car iconfont icon-cart">
                 </div>
-                <div class="add" @click="show">加入购物车</div>
-                <div class="buy" @click="show">立即购买</div>
+                <div class="add" @click="showCar">加入购物车</div>
+                <div class="buy" @click="showBuy">立即购买</div>
                 <div class="like iconfont icon-like">
                 </div>
             </div>
@@ -134,8 +134,69 @@
         close() {
             this.open = false
         },
-        show(){
+        showCar(){
             this.open = true;
+            var user = sessionStorage.getItem('user');
+            if (user) {
+                //自定义代码
+                console.log("用户已登录");
+            }else{
+                console.log("用户未登录");
+            }
+        },
+        showBuy(){
+            this.open = true;
+            // 登录的用户名test=====
+            // sessionStorage.setItem('user', '用户名');
+            // var user = sessionStorage.getItem('user');//获取到的用户信息
+            // var user = 'testuser';
+            // if (user) {
+            //     //自定义代码
+            //     console.log("用户已登录");
+            //      this.$axios.get('http://localhost:2999/changeGoods/addGoods',{params: {
+            //         //  定义假数据
+            //         id: 111,
+            //         userName: user,
+            //         price: 666,
+            //         imgUrl: '..img..',
+            //         title: "测试数据"
+            //      }})
+            //      .then((res)=>{
+            //          console.log(res);
+            //      })
+            // }else{
+            //     // 显示未登录信息
+            //     console.log("用户未登录");
+            // }
+        }, 
+        addCar(){
+            // var user = 'testuser';
+            var user = false;
+            if (user) {
+                //自定义代码
+                console.log("用户已登录");
+                // ?_id=1&userName=hhh&price=666&imgUrl=img&title=lll'
+                this.$axios.get('http://localhost:2999/changeGoods/addGoods'
+                ,{params: {
+                    //  定义假数据
+                    _id: 113,
+                    userName: user,
+                    price: 665,
+                    imgUrl: 'img',
+                    title: "测试数据"
+                 }}
+                 )
+                 .then((res)=>{
+                     console.log(res);
+                 })
+                 .catch((err)=>{
+                     console.log(err);
+                 })
+            }else{
+                // 显示未登录信息
+                console.log("用户未登录");
+                 this.open = false;
+            }
         },
         getDetails(){
             var currentId = this.$route.params.id;

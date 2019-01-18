@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default  new Vuex.Store({
     //state类似于data(数据)
     state: {
-        navShow: true
+        navShow: true,
+        isShowSearch: true
     },
     //getters类似于computed()
     getters: { 
@@ -16,6 +17,9 @@ export default  new Vuex.Store({
     mutations: {
         changeNavShow(state, isShow) {
             state.navShow = isShow;
+        },
+        changeSearchShow(state, isShow) {
+            state.isShowSearch = isShow;
         }
     },
     //类似mutations,一般用于异步
