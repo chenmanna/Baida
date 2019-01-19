@@ -1,7 +1,7 @@
 //数据库的连接
  const mongoose = require('mongoose');
 
- mongoose.connect('mongodb://127.0.0.1:27017/baida',{ useNewUrlParser: true });
+ mongoose.connect('mongodb://127.0.0.1:27017/bdEgo',{ useNewUrlParser: true });
  // hh为数据库的名字
  
  let  db = mongoose.connection;

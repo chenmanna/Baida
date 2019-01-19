@@ -105,7 +105,7 @@ export default {
             // console.log(res.data.data.list);
         this.$axios.post('http://localhost:2999/post',querystring.stringify({
           startNum: 0,
-          sortType: 'SALESVOLUME',
+          sortType: 'SALESVOLUME', 
           scope: 'ALL',
           qryText: currentSearch,
           _t: time

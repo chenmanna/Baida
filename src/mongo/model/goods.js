@@ -2,13 +2,14 @@
  const mongoose = require('mongoose');
  let Schema = mongoose.Schema;
  let goodsSchema=new Schema({
-    _id:{type:Number,required:true},
+    _id:{type:String,required:true},
  	// url:{type:String,required:true},
  	// type:{type:String,required:true},
  	userName:{type:String,required:true},
  	price:{type:String,required:true},
  	imgUrl:{type:String,required:true},
- 	title:{type:String,required:true},
+	 title:{type:String,required:true},
+	 qty:{type:String,required:true},
  	// grounding:{type:Boolean,default:false}
 
  })

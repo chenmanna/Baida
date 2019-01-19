@@ -9,8 +9,15 @@ Router.get('/addGoods',(req,res)=>{
     console.log(req.query);
     res.append("Access-Control-Allow-Origin","*");
 // 1.接受数据
-  let {_id,userName,price,imgUrl,title}=req.query
- Goods.insertMany({_id,userName,price,imgUrl,title})
+  let {_id,userName,price,imgUrl,title,qty}=req.query;
+//   Goods.find({userName:user})
+//   .then((res)=>{
+//       console.log(res);
+//   })
+//   .catch((err)=>{    
+//     console.log(err);
+//   })
+ Goods.insertMany({_id,userName,price,imgUrl,title,qty})
  .then((data)=>{
  	res.send({err:0,msg:'插入成功',data:null})
  })
@@ -22,19 +29,6 @@ Router.get('/addGoods',(req,res)=>{
 
 })
 
-
-var app = express();
-app.get('/addGoods',(req,res)=>{
-    // cors
-    res.append("Access-Control-Allow-Origin","*");
-
-    var url = 'https://m.bd-ego.com/' + apiMap[api] + data;
-    // console.log('11111111111111111',url)
-    request.get(url,(err,response,body)=>{
-        res.send(body);
-        // console.log(1,url);
-    })
-})
 //查询商品
 // Router.post('/getGoods',(req,res)=>{
 //   console.log(req);
@@ -70,22 +64,23 @@ app.get('/addGoods',(req,res)=>{
 
 
 // //查询单个商品
-// Router.post('/getGoodsOne',(req,res)=>{
-//     //返回总条数
-//     // Goods.find({tyle:‘音乐’})//分类查询
-//     let  {id}=req.body
-//     Goods.find({_id:id})
-//     .then((data)=>{
-//         console.log(data);
-//         res.send({err:0,msg:'查询成功',data:data})
+Router.get('/getUserCart',(req,res)=>{
+    //返回总条数
+    // Goods.find({tyle:‘音乐’})//分类查询
+    res.append("Access-Control-Allow-Origin","*");
+    let  {user}=req.query
+    Goods.find({userName:user})
+    .then((data)=>{
+        console.log(data);
+        res.send({err:0,msg:'查询成功',data:data})
 
-//     })
-//     .catch((err)=>{
-//         console.log(err)
-//         res.send({err:-1,msg:'查询错误',data:null})
-//     })
+    })
+    .catch((err)=>{
+        console.log(err)
+        res.send({err:-1,msg:'查询错误',data:null})
+    })
 
-// })
+})
 
 
 

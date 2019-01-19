@@ -91,7 +91,7 @@
                     <div>购买数量</div>
                     <div class="num"> 
                         <span @click="reduce">-</span>
-                        <span>{{buynum}}</span>
+                        <span ref="qty">{{buynum}}</span>
                         <span @click="add">+</span>
                     </div>
                 </div>
@@ -136,13 +136,13 @@
         },
         showCar(){
             this.open = true;
-            var user = sessionStorage.getItem('user');
-            if (user) {
-                //自定义代码
-                console.log("用户已登录");
-            }else{
-                console.log("用户未登录");
-            }
+            // var user = sessionStorage.getItem('user');
+            // if (user) {
+            //     //自定义代码
+            //     console.log("用户已登录");
+            // }else{
+            //     console.log("用户未登录");
+            // }
         },
         showBuy(){
             this.open = true;
@@ -171,23 +171,30 @@
         }, 
         addCar(){
             // var user = 'testuser';
-            var user = false;
-            if (user) {
+            // var user = false;
+            // var user = 'aaa';
+            // console.log(this.$refs.qty.innerHTML)
+            var buyNum = this.$refs.qty.innerHTML;
+            var img = this.data.imageList[0];
+            var username = sessionStorage.getItem('user');
+            if (username) { 
                 //自定义代码
                 console.log("用户已登录");
                 // ?_id=1&userName=hhh&price=666&imgUrl=img&title=lll'
                 this.$axios.get('http://localhost:2999/changeGoods/addGoods'
                 ,{params: {
                     //  定义假数据
-                    _id: 113,
-                    userName: user,
-                    price: 665,
-                    imgUrl: 'img',
-                    title: "测试数据"
+                    _id: this.data.itemCode,
+                    userName: username,
+                    price: this.data.salePrice,
+                    imgUrl: img,
+                    title: this.data.itemTitle,
+                    qty: buyNum
                  }}
                  )
                  .then((res)=>{
                      console.log(res);
+                     console.log(this.data,this);
                  })
                  .catch((err)=>{
                      console.log(err);

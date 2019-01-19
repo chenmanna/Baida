@@ -1,58 +1,121 @@
 <template>
   <div class="cart">
-    <!-- <div class="content">
-      <div>
-        <div class="iconfont icon-shopping"></div>
-        <p>您的购物车空空如也</p>
-        <span>去逛逛</span>
+    <div v-show="noGoods">
+      <div class="content">
+        <div>
+          <div class="iconfont icon-shopping"></div>
+          <p>您的购物车空空如也</p>
+          <span>去逛逛</span>
+        </div>
       </div>
-    </div> -->
-    <!-- <Goodslist />
-    <ToTop /> -->
-    <div class="userCar">
+      <Goodslist />
+      <ToTop />
+    </div>
+   
+    <div class="userCar" v-show="userGoods">
       <div class="header">
         <div class="iconfont icon-icon_left"></div>
         <div>购物车</div>
       </div>
-      <ul>
-        <li class="cartGoods">
-         <!-- <div> -->
-            <div>
-              <!-- <radio></radio> -->
-            </div>
-            <div>
-              <img src="" alt="">
-            </div>
-            <div class="title">
-              <p>title</p>
-              <span>价格</span><span>将比</span>
-            </div>
-            <div class="goodsQty">
-              <div>+</div>
-              <div>1</div>
-              <div>-</div>
-            </div>
-         <!-- </div> -->
-         <!-- <div></div> -->
-        </li>
-      </ul>
+      <div class="goodslist">
+        <ul>
+          <li class="cartGoods" v-for="(item,index) in cartData" :key="index" >
+          <!-- <div> -->
+              <div>
+                <!-- <radio></radio> -->
+              </div>
+              <div>
+                <img :src="item.imgUrl" alt="">
+              </div>
+              <div class="title">
+                <p>{{item.title}}</p>
+                <p>
+                  <span class="price">￥{{item.price}}</span><span>将比</span>
+                </p>
+              
+              </div>
+              <div class="goodsQty">
+                <span>+</span>
+                <span>{{item.qty}}</span>
+                <span>-</span>
+              </div>
+          <!-- </div> -->
+          <!-- <div></div> -->
+          </li>
+        </ul>
+      </div>
+      <div class="totalText">
+        <div class="floatL">
+          <input type="radio">
+          <span>全选</span>
+          <span>总计：</span>
+          <span>￥</span>
+        </div>
+        <div class="floatR">结算</div>
+      </div>
     </div>
-    
   </div>
 </template>
 
 <script>
-// import Goodslist from '../home/components/GoodsList.vue';
-// import ToTop from '../home/components/ToTop.vue';
+import Goodslist from '../home/components/GoodsList.vue';
+import ToTop from '../home/components/ToTop.vue';
 
 export default {
   name: 'Cart',
   components: {
-    // Goodslist,
-    // ToTop
+    Goodslist,
+    ToTop
   },
   data(){
-    return {}
+    return {
+      noGoods : true,
+      userGoods: false,
+      cartData: [],
+      total:''
+    }
+  },
+  // computed:{
+  //   getTotal(){
+      
+  //   }
+  // },
+  created(){
+    var userName = sessionStorage.getItem('user');
+    if(userName){
+       // 获取购物车的数据如果为空则显示同未登录的购物车状态，有则显示购物车的数据
+      this.$axios.get('http://localhost:2999/changeGoods/getUserCart',{params:{
+        user: userName
+      }})
+      .then((res)=>{
+        console.log(res)
+        if(res.data.data.length==0){
+          // 显示的数据
+          console.log('没有数据')
+          this.noGoods = true;
+          this.userGoods = false;
+        }else{
+          this.cartData = res.data.data;
+          console.log('有数据')
+          this.noGoods = false;
+          this.userGoods = true;
+        }
+      })
+    }
+   
+  },
+  beforeRouteLeave(to,from,next){
+      // console.log(this.$store)
+      this.$store.commit('changeNavShow', true); 
+      next();
+      
+  },
+  beforeRouteEnter(to,from,next){
+      // this.$store.commit('changeNavShow', false);
+      // next();
+      next(vm => {
+          vm.$store.commit('changeNavShow', false);
+      })
   }
 }
 </script>
@@ -63,7 +126,7 @@ export default {
     text-align: center;
     .content{
       padding-top: rem(126px);
-      padding-bottom: rem(156px);
+      padding-bottom: rem(156px); 
       border-bottom: rem(20px) solid #f4f4f4;;
       // border-bottom: 20px solid #f4f4f4;
       div{
@@ -100,6 +163,10 @@ export default {
       line-height: rem(88px);
       font-size: rem(30px);
       .header{
+        position: fixed;
+        width: rem(750px);
+
+        top: 0;
         // height: rem(44px);
         height: rem(88px);
         border-bottom: 1px solid #ccc;
@@ -115,10 +182,11 @@ export default {
         }
       }
       ul{
+        margin-top: 44px;
         width: rem(750px);
         height: 100%;
         .cartGoods{
-          width: rem(750px);
+          // width: rem(750px);
           height: rem(180px);
           padding: rem(30px) rem(20px) rem(30px) rem(20px);
           div{
@@ -131,17 +199,52 @@ export default {
           }
           .title{
             width: rem(400px);
-            background: #ccc;
+            margin-right: rem(16px);
+            // background: #ccc;
+            p{
+              padding: 0;
+              font-size: rem(14px);
+              height: rem(30px);
+              line-height: rem(40px);
+              // height: rem(40px);
+              height: 100%;
+              text-align: left;
+              .price{
+                color: #e72714;
+              }
+            }
           }
           .goodsQty{
+            padding: 0;
+            height: rem(120px);
+            width: rem(80px);
             border: 1px solid #666;
-            div{
-              padding: rem(3px);
+            span{
+              height: rem(40px);
+              display: block;
+              line-height: rem(40px);
+              // padding: rem(3px);
             }
           }
         }
       }
-     
+      .totalText{
+        text-align: left;
+        padding-left: rem(20px);
+        height: rem(88px);
+        // background: #666;
+        .floatR{
+          float: right;
+          width: rem(180px);
+          text-align: center;
+          background: #e72714;
+          color: #fff;
+        }
+        .floatL{
+          float: left;
+          width: rem(530px);
+        }
+      }
     }
   }
 </style>

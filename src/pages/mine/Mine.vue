@@ -2,7 +2,7 @@
   <div class="mine">
     <div class="mine-top">
           <div class="mine-set"><span class="iconfont icon-shezhi"></span></div><div class="mine-info"><span class="iconfont icon-naoling"></span></div>
-          <div class="mine-tx"><div></div><span class="mine-name">用户名</span></div>
+          <div class="mine-tx"><div></div><span class="mine-name">用户名</span>{{userinfo}}</div>
           <div class="mine-laba">
             <!-- <span class="iconfont icon-laba"> -->
               <!-- </span> -->
@@ -49,8 +49,15 @@
 <script>
 export default {
   name: 'Mine',
+  data(){
+    return {
+      userinfo: ''
+    }
+  },
   components: {
-
+  },
+  created(){
+    this.userinfo = sessionStorage.getItem('user')
   }
 }
 </script>
