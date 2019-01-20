@@ -2,7 +2,7 @@
  const mongoose = require('mongoose');
  let Schema = mongoose.Schema;
  let goodsSchema=new Schema({
-    _id:{type:String,required:true},
+    userCode:{type:String,required:true},
  	// url:{type:String,required:true},
  	// type:{type:String,required:true},
  	userName:{type:String,required:true},

@@ -14,15 +14,17 @@
    
     <div class="userCar" v-show="userGoods">
       <div class="header">
-        <div class="iconfont icon-icon_left"></div>
+        <div class="iconfont icon-icon_left" @click="goHome"></div>
+        <!-- <div></div> -->
         <div>购物车</div>
       </div>
       <div class="goodslist">
-        <ul>
-          <li class="cartGoods" v-for="(item,index) in cartData" :key="index" >
+        <ul @click="getCheck">
+          <li class="cartGoods" v-for="(item,index) in cartData" :key="index" :id="item.userCode">
           <!-- <div> -->
               <div>
                 <!-- <radio></radio> -->
+                <input type="checkbox" ref="check">
               </div>
               <div>
                 <img :src="item.imgUrl" alt="">
@@ -30,26 +32,27 @@
               <div class="title">
                 <p>{{item.title}}</p>
                 <p>
-                  <span class="price">￥{{item.price}}</span><span>将比</span>
+                  <span class="price">￥{{item.price}}</span><span></span>
                 </p>
               
               </div>
               <div class="goodsQty">
-                <span>+</span>
-                <span>{{item.qty}}</span>
-                <span>-</span>
+                <span @click="add">+</span>
+                <span ref="number">{{item.qty}}</span>
+                <span @click="reduce">-</span>
               </div>
           <!-- </div> -->
           <!-- <div></div> -->
           </li>
         </ul>
       </div>
+      <div class="box"></div>
       <div class="totalText">
         <div class="floatL">
-          <input type="radio">
+          <input type="checkbox">
           <span>全选</span>
           <span>总计：</span>
-          <span>￥</span>
+          <span>￥{{total}}</span>
         </div>
         <div class="floatR">结算</div>
       </div>
@@ -72,14 +75,62 @@ export default {
       noGoods : true,
       userGoods: false,
       cartData: [],
-      total:''
+      total:'',
+      // qty: ''
     }
   },
-  // computed:{
-  //   getTotal(){
-      
-  //   }
-  // },
+  methods:{
+    add(){
+      this.$axios.get('/getResult')
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    },
+    // add(){
+    //   this.$axios.get('http://localhost:2999/changeGoods/addOne',
+    //     {params: {
+    //       currentId: 1
+    //     }}
+    //   )
+    //   // console.log(this.$refs.number.innerHTML,this.$refs.number)
+    //   // console.log(this.$refs.check)
+    // },
+    // reduce(){
+    //   this.$refs.number--;
+    // }
+    goHome(){
+      this.$router.push('/home');
+    },
+    getCheck(e){
+      console.log(e.target);
+      if(e.target.checked){
+        // console.log(111);
+        // this.
+        console.log(e.target.parentNode.parentNode.id)
+        var currentId = e.target.parentNode.parentNode.id;
+        for(var i=0;i<this.cartData.length;i++){
+          if(this.cartData[i].userCode==currentId){
+            this.total = this.cartData[i].qty*this.cartData[i].price;
+          }
+        }
+      }
+      console.log(this.total);
+    }
+  },
+  computed:{
+    getTotal(){
+      // if(this.$refs.check.checked){
+        // return 11;
+      // }
+      // var total;
+      // for(var i=0;i<this.cartData.length;i++){
+      //   return this.cartData[i].price*this.cartData[i].qty;
+      // }
+    }
+  },
   created(){
     var userName = sessionStorage.getItem('user');
     if(userName){
@@ -96,6 +147,11 @@ export default {
           this.userGoods = false;
         }else{
           this.cartData = res.data.data;
+          // var qty = '';
+          // for(var i=0;i<res.data.data.length;i++){
+          //   var qty = res.data.data[i].qty;
+          // }
+          // this.qty = qty;
           console.log('有数据')
           this.noGoods = false;
           this.userGoods = true;
@@ -104,19 +160,6 @@ export default {
     }
    
   },
-  beforeRouteLeave(to,from,next){
-      // console.log(this.$store)
-      this.$store.commit('changeNavShow', true); 
-      next();
-      
-  },
-  beforeRouteEnter(to,from,next){
-      // this.$store.commit('changeNavShow', false);
-      // next();
-      next(vm => {
-          vm.$store.commit('changeNavShow', false);
-      })
-  }
 }
 </script>
 <style lang="scss" scoped>
@@ -157,6 +200,7 @@ export default {
       
     }
     .userCar{
+      overflow: auto;
       // width: 100%;
       // height: rem(88px);
       text-align: center;
@@ -165,7 +209,7 @@ export default {
       .header{
         position: fixed;
         width: rem(750px);
-
+        background: #fff;
         top: 0;
         // height: rem(44px);
         height: rem(88px);
@@ -232,6 +276,9 @@ export default {
         text-align: left;
         padding-left: rem(20px);
         height: rem(88px);
+        position: fixed;
+        bottom: rem(83px);
+        background: #fff;
         // background: #666;
         .floatR{
           float: right;
@@ -244,6 +291,10 @@ export default {
           float: left;
           width: rem(530px);
         }
+      }
+      .box{
+        width: rem(750px);
+        height: rem(200px);
       }
     }
   }

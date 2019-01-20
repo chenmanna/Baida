@@ -184,14 +184,13 @@
                 this.$axios.get('http://localhost:2999/changeGoods/addGoods'
                 ,{params: {
                     //  定义假数据
-                    _id: this.data.itemCode,
+                    userCode: this.data.itemCode,
                     userName: username,
                     price: this.data.salePrice,
                     imgUrl: img,
                     title: this.data.itemTitle,
                     qty: buyNum
-                 }}
-                 )
+                 }})
                  .then((res)=>{
                      console.log(res);
                      console.log(this.data,this);
@@ -199,8 +198,10 @@
                  .catch((err)=>{
                      console.log(err);
                  })
+                 this.open = false;
             }else{
                 // 显示未登录信息
+                alert('请先登录');
                 console.log("用户未登录");
                  this.open = false;
             }
@@ -286,6 +287,7 @@
         }
     },
     created(){
+      window.scrollTo(0,0);
       this.getDetails();
       this.getBanerimg();
     //   this.getImg();

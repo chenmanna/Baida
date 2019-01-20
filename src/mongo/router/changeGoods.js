@@ -4,12 +4,12 @@ const Router=express.Router();
 const Goods=require('../model/goods.js')
 //增加商品
 //添加商品信息
-
+// 详情页添加商品数量========================
 Router.get('/addGoods',(req,res)=>{
     console.log(req.query);
     res.append("Access-Control-Allow-Origin","*");
 // 1.接受数据
-  let {_id,userName,price,imgUrl,title,qty}=req.query;
+  let {userCode,userName,price,imgUrl,title,qty}=req.query;
 //   Goods.find({userName:user})
 //   .then((res)=>{
 //       console.log(res);
@@ -17,15 +17,69 @@ Router.get('/addGoods',(req,res)=>{
 //   .catch((err)=>{    
 //     console.log(err);
 //   })
- Goods.insertMany({_id,userName,price,imgUrl,title,qty})
- .then((data)=>{
- 	res.send({err:0,msg:'插入成功',data:null})
- })
- .catch((err)=>{
-
- 	console.log(err)
+Goods.find({userName: userName})
+.then((data)=>{
+    if(data.length>0){
+        console.log('有用户购物车信息');
+        Goods.find({userName: userName}).find({userCode: userCode})
+        .then((data)=>{
+            if(data.length>0){
+                console.log('有相同的商品信息');
+                // 相同商品的qty++
+                // Goods.find({userCode: userCode}).
+                // console.log(data.qty,111111111111);
+                console.log(data,999999)
+                console.log(qty,22222222222);
+                console.log(data.qty/1+qty*1);
+                // Goods.find({userCode: userCode})
+                // .then((data)=>{
+                    console.log(data,55555,data.qty);
+                    // res.send('哈哈哈哈');
+                    var currentQty;
+                    for(var i=0;i<data.length;i++){
+                        currentQty = data[i].qty;
+                    }
+                    console.log(currentQty);
+                    Goods.updateOne({userCode: userCode},{qty: currentQty/1+qty*1})
+                    .then((data)=>{
+                        console.log('qty++')
+                        res.send({err:0,msg:'插入成功',data:null}) 
+                    })
+                // })
+                // Goods.updateOne({userCode: userCode},{qty: data.qty/1+qty*1})
+                
+                // .then((data)=>{
+                //     console.log('qty++')
+                //     res.send({err:0,msg:'插入成功',data:null}) 
+                // })
+                .catch((err)=>{
+                    console.log(err);
+                })
+            }else{
+                Goods.insertMany({userCode,userName,price,imgUrl,title,qty})
+                res.send({err:0,msg:'插入成功',data:null}) 
+            }
+        })
+    }else{
+        // 没有用户购物车信息
+        Goods.insertMany({userCode,userName,price,imgUrl,title,qty})
+        res.send({err:0,msg:'插入成功',data:null})
+    }
+})
+.catch((err)=>{
+    console.log(err)
     res.send({err:-1,msg:'插入失败',data:null})
- })
+})
+// =====
+//  Goods.insertMany({userCode,userName,price,imgUrl,title,qty})
+//  .then((data)=>{
+//  	res.send({err:0,msg:'插入成功',data:null})
+//  })
+//  .catch((err)=>{
+
+//  	console.log(err)
+//     res.send({err:-1,msg:'插入失败',data:null})
+//  })
 
 })
 
@@ -63,7 +117,7 @@ Router.get('/addGoods',(req,res)=>{
 // })
 
 
-// //查询单个商品
+//查询单个商品==========================
 Router.get('/getUserCart',(req,res)=>{
     //返回总条数
     // Goods.find({tyle:‘音乐’})//分类查询
@@ -79,10 +133,46 @@ Router.get('/getUserCart',(req,res)=>{
         console.log(err)
         res.send({err:-1,msg:'查询错误',data:null})
     })
-
 })
 
 
+// 购物车添加商品数量1================***************
+Router.get('/addOne',(req,res)=>{
+    //返回总条数
+    // Goods.find({tyle:‘音乐’})//分类查询
+    res.append("Access-Control-Allow-Origin","*");
+    let  {currentId}=req.query
+    Goods.find({userCode: currentId})
+    .then((data)=>{
+        Goods.updateOne({qty: qty++})
+        console.log(data);
+        res.send({err:0,msg:'查询成功',data:data})
+
+    })
+    .catch((err)=>{
+        console.log(err)
+        res.send({err:-1,msg:'查询错误',data:null})
+    })
+})
+
+
+//购物车减少商品数量1 ==========================************
+Router.get('/reduceOne',(req,res)=>{
+    //返回总条数
+    // Goods.find({tyle:‘音乐’})//分类查询
+    res.append("Access-Control-Allow-Origin","*");
+    let  {currentId}=req.query
+    Goods.find({userCode:currentId})
+    .then((data)=>{
+        Goods.updateOne({qty: qty--})
+        res.send({err:0,msg:'查询成功',data:data})
+
+    })
+    .catch((err)=>{
+        console.log(err)
+        res.send({err:-1,msg:'查询错误',data:null})
+    })
+})
 
 // //修改商品
 //  // 

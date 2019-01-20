@@ -49,6 +49,8 @@ export default {
 </script>
 <style lang="scss" scoped>
   .Homecon{
+    // overflow-y:auto;
+        // max-height: 100vh;
       width: 100%;
       height: 100%;
   }

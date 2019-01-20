@@ -28,7 +28,8 @@ Vue.config.productionTip = false
 // 路由拦截
 // let VueRouter = new router();
 router.beforeEach((to, from, next) => {
-  if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
+//   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
+    if(to.path=='/mine'){
       if (sessionStorage.getItem('user')) {  // 通过vuex state获取当前的token是否存在
           next();
       }

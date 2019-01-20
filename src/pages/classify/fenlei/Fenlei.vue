@@ -54,6 +54,7 @@ export default {
   
   created(){
     // https://m.bd-ego.com/bd-product/api/categ/itemCategList?_t=1547285992369
+    window.scrollTo(0,0);
     var time = (new Date()).valueOf();
 			this.$axios.get(`http://localhost:2999/proxy/Liebiao?categId=2&_t=${time}`).then((res)=>{
 
@@ -74,6 +75,7 @@ export default {
   }
   .Fenlei{
      background: #f4f4f4;
+     overflow: auto;
      ul{
       
      }

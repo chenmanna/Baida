@@ -56,6 +56,8 @@ export default {
 <style lang="scss" scoped>
     .goodslist{
         width: 100%;
+        // overflow-y:auto;
+        // max-height: 100vh;
         margin-bottom : rem(84px);
         font-size: rem(14px);
         div{

@@ -40,6 +40,7 @@
 
           </ul>
     </div>
+    <div class="del" @click="delUserinfo">退出登录</div>
     <div class="mine-foryou">
         为你推荐
     </div>
@@ -56,7 +57,16 @@ export default {
   },
   components: {
   },
+  methods: {
+    delUserinfo(){
+      // sessionStorage.setItem('')
+      sessionStorage.clear();
+      console.log( sessionStorage.getItem('user'));
+      this.$router.push('/home')
+    }
+  },
   created(){
+    window.scrollTo(0,0);
     this.userinfo = sessionStorage.getItem('user')
   }
 }
@@ -197,6 +207,13 @@ export default {
       width: 100%;
       height: rem(60px);
       font-size: rem(36px);
+    }
+    .del{
+      font-size: rem(26px);
+      color: #e72714;
+      height: rem(80px);
+      line-height: rem(80px);
+      padding-left: rem(16px);
     }
   }
 
