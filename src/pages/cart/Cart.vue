@@ -20,7 +20,7 @@
       </div>
       <div class="goodslist">
         <ul @click="getCheck">
-          <li class="cartGoods" v-for="(item,index) in cartData" :key="index" :id="item.userCode">
+          <li class="cartGoods" v-for="(item,index) in cartData" :key="index" :id="item._id">
           <!-- <div> -->
               <div>
                 <!-- <radio></radio> -->
@@ -39,7 +39,9 @@
               <div class="goodsQty">
                 <span @click="add">+</span>
                 <span ref="number">{{item.qty}}</span>
-                <span @click="reduce">-</span>
+                <!-- <span @click="reduce">-</span> -->
+                <span>-</span>
+
               </div>
           <!-- </div> -->
           <!-- <div></div> -->
@@ -79,28 +81,63 @@ export default {
       // qty: ''
     }
   },
+  computed:{
+    // getChangeData(){
+    //   return this.cartData
+
+    // }
+  },
   methods:{
-    add(){
-      this.$axios.get('/getResult')
-      .then((res)=>{
-        console.log(res);
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
-    },
     // add(){
-    //   this.$axios.get('http://localhost:2999/changeGoods/addOne',
+    //   this.$axios.get('/getResult')
+    //   .then((res)=>{
+    //     console.log(res);
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err);
+    //   })
+    // },
+    add(e){
+      var currentId = e.target.parentNode.parentNode.id;
+      this.$axios.get('http://localhost:2999/changeGoods/addOne',
+        {params: {
+          currentId: currentId
+        }}
+      )
+      .then((res)=>{
+          console.log(res);
+          console.log(currentId)
+          var data = res.data.data;
+          var currentQty;
+          for(var i=0;i<data.length;i++){
+            currentQty = data[i].qty;
+          }
+          for(var i=0;i<this.cartData.length;i++){
+            if(this.cartData[i]._id==currentId){
+              this.cartData[i].qty = currentQty;
+            }
+          }
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+    },
+    // reduce(e){
+    //    var currentId = e.target.parentNode.parentNode.id;
+    //     this.$axios.get('http://localhost:2999/changeGoods/reduceOne',
     //     {params: {
-    //       currentId: 1
+    //       currentId: currentId
     //     }}
     //   )
-    //   // console.log(this.$refs.number.innerHTML,this.$refs.number)
-    //   // console.log(this.$refs.check)
+    //   .then((res)=>{
+
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err)
+    //   })
+    //   // this.$refs.number--;
+    //   console.log('减少')
     // },
-    // reduce(){
-    //   this.$refs.number--;
-    // }
     goHome(){
       this.$router.push('/home');
     },
@@ -120,17 +157,17 @@ export default {
       console.log(this.total);
     }
   },
-  computed:{
-    getTotal(){
-      // if(this.$refs.check.checked){
-        // return 11;
-      // }
-      // var total;
-      // for(var i=0;i<this.cartData.length;i++){
-      //   return this.cartData[i].price*this.cartData[i].qty;
-      // }
-    }
-  },
+  // computed:{
+  //   getTotal(){
+  //     // if(this.$refs.check.checked){
+  //       // return 11;
+  //     // }
+  //     // var total;
+  //     // for(var i=0;i<this.cartData.length;i++){
+  //     //   return this.cartData[i].price*this.cartData[i].qty;
+  //     // }
+  //   }
+  // },
   created(){
     var userName = sessionStorage.getItem('user');
     if(userName){
