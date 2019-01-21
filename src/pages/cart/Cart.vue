@@ -32,16 +32,14 @@
               <div class="title">
                 <p>{{item.title}}</p>
                 <p>
-                  <span class="price">￥{{item.price}}</span><span></span>
+                  <span class="price">￥{{item.price}}</span><span class="delOne">&Chi;</span>
                 </p>
               
               </div>
               <div class="goodsQty">
                 <span @click="add">+</span>
                 <span ref="number">{{item.qty}}</span>
-                <!-- <span @click="reduce">-</span> -->
-                <span>-</span>
-
+                <span @click="reduce">-</span>
               </div>
           <!-- </div> -->
           <!-- <div></div> -->
@@ -122,22 +120,34 @@ export default {
           console.log(err);
         })
     },
-    // reduce(e){
-    //    var currentId = e.target.parentNode.parentNode.id;
-    //     this.$axios.get('http://localhost:2999/changeGoods/reduceOne',
-    //     {params: {
-    //       currentId: currentId
-    //     }}
-    //   )
-    //   .then((res)=>{
-
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err)
-    //   })
-    //   // this.$refs.number--;
-    //   console.log('减少')
-    // },
+    reduce(e){
+       var currentId = e.target.parentNode.parentNode.id;
+        this.$axios.get('http://localhost:2999/changeGoods/reduceOne',
+        {params: {
+          currentId: currentId
+        }}
+      )
+      .then((res)=>{
+          console.log(res);
+          console.log(currentId)
+          var data = res.data.data;
+          var currentQty;
+          for(var i=0;i<data.length;i++){
+            currentQty = data[i].qty;
+          }
+          console.log(this.cartData.length,111111111111111)
+          for(var i=0;i<this.cartData.length;i++){
+            if(this.cartData[i]._id==currentId){
+              this.cartData[i].qty = currentQty;
+            }
+          }
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      // this.$refs.number--;
+      console.log('减少')
+    },
     goHome(){
       this.$router.push('/home');
     },
@@ -292,6 +302,10 @@ export default {
               text-align: left;
               .price{
                 color: #e72714;
+                float: left;
+              }
+              .delOne{
+                float: right;
               }
             }
           }
