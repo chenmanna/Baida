@@ -19,12 +19,13 @@
         <div>购物车</div>
       </div>
       <div class="goodslist">
-        <ul @click="getCheck">
+        <ul>
           <li class="cartGoods" v-for="(item,index) in cartData" :key="index" :id="item._id">
           <!-- <div> -->
               <div>
                 <!-- <radio></radio> -->
-                <input type="checkbox" ref="check">
+                                                                  <!-- :checked="isChecked" -->
+                <input name="test" type="checkbox" ref="check" @click="checkedState(item)">
               </div>
               <div>
                 <img :src="item.imgUrl" alt="">
@@ -32,7 +33,7 @@
               <div class="title">
                 <p>{{item.title}}</p>
                 <p>
-                  <span class="price">￥{{item.price}}</span><span class="delOne">&Chi;</span>
+                  <span class="price">￥{{item.price}}</span><span class="delOne" @click="delGoods">&Chi;</span>
                 </p>
               
               </div>
@@ -49,10 +50,10 @@
       <div class="box"></div>
       <div class="totalText">
         <div class="floatL">
-          <input type="checkbox">
+          <input type="checkbox"  @click="allChecked">
           <span>全选</span>
           <span>总计：</span>
-          <span>￥{{total}}</span>
+          <span>￥{{allPrice}}</span>
         </div>
         <div class="floatR">结算</div>
       </div>
@@ -76,25 +77,10 @@ export default {
       userGoods: false,
       cartData: [],
       total:'',
-      // qty: ''
     }
   },
-  computed:{
-    // getChangeData(){
-    //   return this.cartData
-
-    // }
-  },
   methods:{
-    // add(){
-    //   this.$axios.get('/getResult')
-    //   .then((res)=>{
-    //     console.log(res);
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err);
-    //   })
-    // },
+    // 商品数量+1===
     add(e){
       var currentId = e.target.parentNode.parentNode.id;
       this.$axios.get('http://localhost:2999/changeGoods/addOne',
@@ -120,9 +106,10 @@ export default {
           console.log(err);
         })
     },
+    // 商品数量-1===
     reduce(e){
-       var currentId = e.target.parentNode.parentNode.id;
-        this.$axios.get('http://localhost:2999/changeGoods/reduceOne',
+      var currentId = e.target.parentNode.parentNode.id;
+      this.$axios.get('http://localhost:2999/changeGoods/reduceOne',
         {params: {
           currentId: currentId
         }}
@@ -145,39 +132,73 @@ export default {
         .catch((err)=>{
           console.log(err);
         })
-      // this.$refs.number--;
-      console.log('减少')
     },
+    // 删除当前商品===
+    delGoods(e){
+      console.log(e.target)
+      var currentId = e.target.parentNode.parentNode.parentNode.id;
+      console.log(currentId);
+      this.$axios.get('http://localhost:2999/changeGoods/delGood',
+        {params: {    
+          currentId: currentId
+        }}
+      )
+      .then((res)=>{
+        console.log(res);
+        this.cartData = res.data.data;
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
+    // 返回首页按钮===
     goHome(){
       this.$router.push('/home');
     },
-    getCheck(e){
-      console.log(e.target);
-      if(e.target.checked){
-        // console.log(111);
-        // this.
-        console.log(e.target.parentNode.parentNode.id)
-        var currentId = e.target.parentNode.parentNode.id;
-        for(var i=0;i<this.cartData.length;i++){
-          if(this.cartData[i].userCode==currentId){
-            this.total = this.cartData[i].qty*this.cartData[i].price;
-          }
-        }
+    // 点击勾选按钮设置勾选按钮的状态===
+    checkedState(item){
+      // 设置选中状态
+      if (item.active) {
+          this.$set(item, 'active', false);
+      } else {
+          this.$set(item, 'active', true);
       }
-      console.log(this.total);
+      console.log(item);
+    },
+    // 全选状态===（不能实现页面按钮勾选，绑定不到model）
+    allChecked(e){
+      for(var i=0;i<this.cartData.length;i++){
+        if(this.cartData[i].active){
+           this.$set(this.cartData[i], 'active', false);
+        }else{
+          this.$set(this.cartData[i], 'active', true);
+        }
+      } 
+      console.log(this.cartData)
+      console.log(e.target.checked)
+      if(e.target.checked){
+        // this.isChecked = true;
+        this.$refs.check.checked = true;
+      }else{
+        // this.isChecked = false;
+        this.$refs.check.checked = false;
+      }
+      console.log(this.$refs.check.checked,55555555555)
     }
   },
-  // computed:{
-  //   getTotal(){
-  //     // if(this.$refs.check.checked){
-  //       // return 11;
-  //     // }
-  //     // var total;
-  //     // for(var i=0;i<this.cartData.length;i++){
-  //     //   return this.cartData[i].price*this.cartData[i].qty;
-  //     // }
-  //   }
-  // },
+  // 计算当前勾选商品价格===
+  computed:{
+    allPrice() {
+      var result = 0;
+      for (var i in this.cartData) {
+          if (this.cartData[i].active) {
+              result += this.cartData[i].price * this.cartData[i].qty;
+          }
+      }
+      return result;
+    }
+  },
+  // 初始渲染请求===
   created(){
     var userName = sessionStorage.getItem('user');
     if(userName){
@@ -189,23 +210,17 @@ export default {
         console.log(res)
         if(res.data.data.length==0){
           // 显示的数据
-          console.log('没有数据')
+          // console.log('没有数据')
           this.noGoods = true;
           this.userGoods = false;
         }else{
           this.cartData = res.data.data;
-          // var qty = '';
-          // for(var i=0;i<res.data.data.length;i++){
-          //   var qty = res.data.data[i].qty;
-          // }
-          // this.qty = qty;
-          console.log('有数据')
+          // console.log('有数据')
           this.noGoods = false;
           this.userGoods = true;
         }
       })
-    }
-   
+    }   
   },
 }
 </script>
@@ -218,7 +233,6 @@ export default {
       padding-top: rem(126px);
       padding-bottom: rem(156px); 
       border-bottom: rem(20px) solid #f4f4f4;;
-      // border-bottom: 20px solid #f4f4f4;
       div{
         height: rem(305px);
         width: 100%;
@@ -234,22 +248,15 @@ export default {
         }
         span{
           display: inline-block;
-          // width: rem(150px);
           padding: rem(15px);
-          // height: rem(66px);
-          // line-height: rem(66px);
           text-align: center;
           border: 1px solid #000;
           font-size: rem(32px);
-          // padding: rem()
         }
-      }
-      
+      }     
     }
     .userCar{
       overflow: auto;
-      // width: 100%;
-      // height: rem(88px);
       text-align: center;
       line-height: rem(88px);
       font-size: rem(30px);
@@ -258,7 +265,6 @@ export default {
         width: rem(750px);
         background: #fff;
         top: 0;
-        // height: rem(44px);
         height: rem(88px);
         border-bottom: 1px solid #ccc;
         div{
@@ -277,7 +283,6 @@ export default {
         width: rem(750px);
         height: 100%;
         .cartGoods{
-          // width: rem(750px);
           height: rem(180px);
           padding: rem(30px) rem(20px) rem(30px) rem(20px);
           div{
@@ -291,13 +296,11 @@ export default {
           .title{
             width: rem(400px);
             margin-right: rem(16px);
-            // background: #ccc;
             p{
               padding: 0;
               font-size: rem(14px);
               height: rem(30px);
               line-height: rem(40px);
-              // height: rem(40px);
               height: 100%;
               text-align: left;
               .price{
@@ -318,7 +321,6 @@ export default {
               height: rem(40px);
               display: block;
               line-height: rem(40px);
-              // padding: rem(3px);
             }
           }
         }
@@ -330,7 +332,6 @@ export default {
         position: fixed;
         bottom: rem(83px);
         background: #fff;
-        // background: #666;
         .floatR{
           float: right;
           width: rem(180px);

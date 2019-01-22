@@ -17,7 +17,8 @@
     <div v-show="showSearchPage">
        <div class="search_c">
         <p>大家都在搜</p>
-        <ul @click.stop="searchGoods">
+        <!-- <ul @click.stop="searchGoods"> -->
+        <ul>
           <li>
             <span>兰蔻</span>
             <span>白色恋人</span>
@@ -92,33 +93,33 @@ export default {
       this.showSearchPage = false;
       this.$store.commit('changeSearchShow',true);
     },
-    searchGoods(e){
-      // decodeURI encodeURI
-      console.log(e,e.target)
-      var currentSearch = e.target.innerHTML;
-      console.log(currentSearch)
-        var time = (new Date()).valueOf();
-        // post请求
-        var querystring = require('querystring');  
-        // this.$axios.post(`http://localhost:2999/proxyPost/HomeSearch?startNum=0&sortType=SALESVOLUME&scope=ALL&qryText=${currentSearch}&_t=${time}`)
-        // .then((res)=>{
-            // console.log(res.data.data.list);
-        this.$axios.post('http://localhost:2999/post',querystring.stringify({
-          startNum: 0,
-          sortType: 'SALESVOLUME', 
-          scope: 'ALL',
-          qryText: currentSearch,
-          _t: time
-          }))
-          .then((res)=>{
+    // searchGoods(e){
+    //   // decodeURI encodeURI
+    //   console.log(e,e.target)
+    //   var currentSearch = e.target.innerHTML;
+    //   console.log(currentSearch)
+    //     var time = (new Date()).valueOf();
+    //     // post请求
+    //     var querystring = require('querystring');  
+    //     // this.$axios.post(`http://localhost:2999/proxyPost/HomeSearch?startNum=0&sortType=SALESVOLUME&scope=ALL&qryText=${currentSearch}&_t=${time}`)
+    //     // .then((res)=>{
+    //         // console.log(res.data.data.list);
+    //     this.$axios.post('http://localhost:2999/post',querystring.stringify({
+    //       startNum: 0,
+    //       sortType: 'SALESVOLUME', 
+    //       scope: 'ALL',
+    //       qryText: currentSearch,
+    //       _t: time
+    //       }))
+    //       .then((res)=>{
    
-           console.log(res);
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
-      // https://m.bd-ego.com/bd-product/api/delivery/searchList?pageSize=13&startNum=0&qryText=%E5%8F%8C%E7%AB%8B%E4%BA%BA&categId=&secondCategId=&_t=1547712758284
-    }
+    //        console.log(res);
+    //     })
+    //     .catch((err)=>{
+    //         console.log(err);
+    //     })
+    //   // https://m.bd-ego.com/bd-product/api/delivery/searchList?pageSize=13&startNum=0&qryText=%E5%8F%8C%E7%AB%8B%E4%BA%BA&categId=&secondCategId=&_t=1547712758284
+    // }
   },
   created(){
     // this.search()

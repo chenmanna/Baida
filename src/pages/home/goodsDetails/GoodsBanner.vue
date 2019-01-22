@@ -344,8 +344,7 @@
                 p{
                     padding: 0;
                 }
-            }
-            
+            } 
         }
         .confirm{
             height: rem(100px);
@@ -353,9 +352,10 @@
             text-align: center;
             background: #e72714;
             color: #fff;
+            padding: 0;
+            font-size: rem(30px);
         }
         .buyQty{
-            // float: left;
             width: 100%;
             line-height: rem(150px);
             div{
@@ -447,7 +447,6 @@
     }
     .specification{
         font-size: rem(16px);
-        // padding: 0;
         margin-left: rem(20px);
         margin-right: rem(20px);
         padding-top: rem(20px);
@@ -456,13 +455,10 @@
         height: 100%;
         div{
             padding: 0;
-            // height: rem(77px);
             background: #fff;
             margin-bottom: rem(20px);
             line-height: rem(70px);
             p{
-                // height: rem(30px);
-                // line-height: rem(30px);
                 padding: 0;
                 padding-top: rem(10px);
             }
@@ -501,12 +497,8 @@
             width: rem(750px);
             padding-left: rem(20px);
             p{
-                // height: rem(50px);
-                // line-height: rem(50px);
                 padding: 0;
                 padding-top: rem(6px);
-                // padding-left: rem(200px)
-                // padding: rem(10px);
             }
         }
         .mt-tab-container{
@@ -527,7 +519,6 @@
                 width: rem(70px);
                 line-height: rem(96px);
                 text-align: center;
-                // height: rem(100px);
             }
            .buy{
                 width: rem(220px);
@@ -566,9 +557,4 @@
     }
   }
 }
-// .box .drawer .goodsbox[data-v-19ccd34a]{
-//     width: rem(170px);
-//     height: rem(170px);
-//     border: 1px solid #ccc;
-// }
 </style>

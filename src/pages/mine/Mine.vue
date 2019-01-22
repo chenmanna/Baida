@@ -19,8 +19,6 @@
           <li><div class="mine-tb"><span class="iconfont icon-weibiaoti20101"></span></div><div class="mine-wz">待收货</div></li>
           <li><div class="mine-tb"><span class="iconfont icon-zhayan"></span></div><div class="mine-wz">已完成</div></li>
           <li><div class="mine-tb"><span class="iconfont icon-tuihuoshouhou"></span></div><div class="mine-wz">退款/售后</div></li>
-
-
         </ul>
     </div>
     <div class="mine-menu"> 
@@ -36,27 +34,28 @@
           <li><div class="mine-tb"><span class="iconfont icon-wode"></span></div><div class="mine-wz">邀请有奖</div></li>
           <li><div class="mine-tb"><span class="iconfont icon-qian"></span></div><div class="mine-wz">分享赚钱</div></li>
           <li><div class="mine-tb"><span class="iconfont icon-shangdian"></span></div><div class="mine-wz">易购门店</div></li>
-
-
           </ul>
     </div>
     <div class="del" @click="delUserinfo">退出登录</div>
     <div class="mine-foryou">
         为你推荐
     </div>
+    <GoodsList />
   </div>
 </template>
 
 <script>
+import GoodsList from '../home/components/GoodsList.vue'
 export default {
   name: 'Mine',
+  components:{GoodsList},
   data(){
     return {
       userinfo: ''
     }
   },
-  components: {
-  },
+  // components: {
+  // },
   methods: {
     delUserinfo(){
       // sessionStorage.setItem('')
@@ -76,7 +75,8 @@ export default {
     .iconfont{
       font-size: rem(60px);
     }
-    height: rem(1800px);
+    // height: rem(1800px);
+    height: rem(1523px);
     background: #f4f4f4;
     .mine-top{
       position: relative;
