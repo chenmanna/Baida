@@ -136,44 +136,11 @@
         },
         showCar(){
             this.open = true;
-            // var user = sessionStorage.getItem('user');
-            // if (user) {
-            //     //自定义代码
-            //     console.log("用户已登录");
-            // }else{
-            //     console.log("用户未登录");
-            // }
         },
         showBuy(){
             this.open = true;
-            // 登录的用户名test=====
-            // sessionStorage.setItem('user', '用户名');
-            // var user = sessionStorage.getItem('user');//获取到的用户信息
-            // var user = 'testuser';
-            // if (user) {
-            //     //自定义代码
-            //     console.log("用户已登录");
-            //      this.$axios.get('http://localhost:2999/changeGoods/addGoods',{params: {
-            //         //  定义假数据
-            //         id: 111,
-            //         userName: user,
-            //         price: 666,
-            //         imgUrl: '..img..',
-            //         title: "测试数据"
-            //      }})
-            //      .then((res)=>{
-            //          console.log(res);
-            //      })
-            // }else{
-            //     // 显示未登录信息
-            //     console.log("用户未登录");
-            // }
         }, 
         addCar(){
-            // var user = 'testuser';
-            // var user = false;
-            // var user = 'aaa';
-            // console.log(this.$refs.qty.innerHTML)
             var buyNum = this.$refs.qty.innerHTML;
             var img = this.data.imageList[0];
             var username = sessionStorage.getItem('user');
@@ -257,8 +224,6 @@
              this.$axios.get(`http://localhost:2999/proxy/Goodsdetailsimg?_t=${time}`)
             .then((res)=>{
                console.log(111111111111111111111111,res);
-            //    this.bannerData = res.data.data;
-            //    console.log(this.bannerData)
             })
             .catch((err)=>{
                 console.log(err);
@@ -290,7 +255,6 @@
       window.scrollTo(0,0);
       this.getDetails();
       this.getBanerimg();
-    //   this.getImg();
     }
   }
 </script>

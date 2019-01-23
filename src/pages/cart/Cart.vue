@@ -25,7 +25,7 @@
               <div>
                 <!-- <radio></radio> -->
                                                                   <!-- :checked="isChecked" -->
-                <input name="test" type="checkbox" ref="check" @click="checkedState(item)">
+                <input name="test" type="checkbox" ref="check" @click="checkedState(item)" :checked="item.active">
               </div>
               <div>
                 <img :src="item.imgUrl" alt="">
@@ -50,7 +50,7 @@
       <div class="box"></div>
       <div class="totalText">
         <div class="floatL">
-          <input type="checkbox"  @click="allChecked">
+          <input type="checkbox"  @click="allChecked" v-model="checkAll">
           <span>全选</span>
           <span>总计：</span>
           <span>￥{{allPrice}}</span>
@@ -64,7 +64,6 @@
 <script>
 import Goodslist from '../home/components/GoodsList.vue';
 import ToTop from '../home/components/ToTop.vue';
-
 export default {
   name: 'Cart',
   components: {
@@ -77,6 +76,7 @@ export default {
       userGoods: false,
       cartData: [],
       total:'',
+      isChecked: false
     }
   },
   methods:{
@@ -170,24 +170,23 @@ export default {
       for(var i=0;i<this.cartData.length;i++){
         if(this.cartData[i].active){
            this.$set(this.cartData[i], 'active', false);
+           this.isChecked = this.cartData[i].active;
         }else{
           this.$set(this.cartData[i], 'active', true);
+          this.isChecked = this.cartData[i].active;
         }
       } 
       console.log(this.cartData)
-      console.log(e.target.checked)
-      if(e.target.checked){
-        // this.isChecked = true;
-        this.$refs.check.checked = true;
-      }else{
-        // this.isChecked = false;
-        this.$refs.check.checked = false;
-      }
-      console.log(this.$refs.check.checked,55555555555)
-    }
+    },
+    // ====================================================================
   },
-  // 计算当前勾选商品价格===
+  // 计算当前勾选商品价格==========================================================================================
   computed:{
+    checkAll(){
+        // get(){
+          return this.cartData.every(item=>item.active) 
+        // },
+    },
     allPrice() {
       var result = 0;
       for (var i in this.cartData) {
