@@ -1,0 +1,70 @@
+﻿{
+  "code": 1000,
+  "data": [
+    {
+      "categName": "全部",
+      "logourl": "http://st.allpyra.com/data/static/op/cic/ic_category_all_default.png",
+      "parentCategId": 1,
+      "scid": 0,
+      "sequence": 0
+    },
+    {
+      "categName": "奶粉",
+      "logourl": "http://st.allpyra.com/data/static/op/fic/b-001.png",
+      "parentCategId": 1,
+      "scid": 10023,
+      "sequence": 1
+    },
+    {
+      "categName": "尿裤湿巾",
+      "logourl": "http://st.allpyra.com/data/static/op/fic/b-010.png",
+      "parentCategId": 1,
+      "scid": 10064,
+      "sequence": 2
+    },
+    {
+      "categName": "营养辅食",
+      "logourl": "http://st.allpyra.com/data/static/op/fic/e-002.png",
+      "parentCategId": 1,
+      "scid": 10057,
+      "sequence": 3
+    },
+    {
+      "categName": "儿童玩具",
+      "logourl": "https://img.allpyra.com/942ffe48-456d-4a7f-9707-3e73b4f3b7e8.jpg",
+      "parentCategId": 1,
+      "scid": 10179,
+      "sequence": 4
+    },
+    {
+      "categName": "婴幼洗护",
+      "logourl": "https://img.allpyra.com/4aaa0fb7-6ea0-4c90-9793-46916ccff6d7.jpg",
+      "parentCategId": 1,
+      "scid": 10029,
+      "sequence": 5
+    },
+    {
+      "categName": "婴幼喂哺",
+      "logourl": "http://st.allpyra.com/data/static/op/fic/b-008.png",
+      "parentCategId": 1,
+      "scid": 10061,
+      "sequence": 6
+    },
+    {
+      "categName": "孕妈专区",
+      "logourl": "http://st.allpyra.com/data/static/op/fic/b-003.png",
+      "parentCategId": 1,
+      "scid": 10026,
+      "sequence": 7
+    },
+    {
+      "categName": "宝宝用品",
+      "logourl": "https://img.allpyra.com/a32b3a7b-bbee-4592-abf8-9857de562c05.jpg",
+      "parentCategId": 1,
+      "scid": 10184,
+      "sequence": 8
+    }
+  ],
+  "desc": "成功",
+  "tid": "f2e74784-9f6e-48bd-aee4-9a56507c1432"
+}

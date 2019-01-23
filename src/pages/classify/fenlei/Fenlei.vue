@@ -37,34 +37,40 @@
       </div>
       <div class="fenlei_right">
           <ul>
-            <li><img src="http://st.allpyra.com/data/static/op/cic/ic_category_all_default.png?imageslim" alt="">
-            <div>全部</div></li>
+            <!-- <li><img src="http://st.allpyra.com/data/static/op/cic/ic_category_all_default.png?imageslim" alt=""> -->
+            <!-- <div>全部</div></li> -->
+            <li v-for="item in muying" :key="item.scid">
+              <img :src="item.logourl" alt="">
+              <div>{{item.categName}}</div>
+            </li>
           </ul>
       </div>
   </div>
 </template>
 <script>
+import goodstest from '../../../muying.json'
 export default { 
   name:'Fenlei',
   data() {
     return {
-      recommend:[]
+      muying: []
+      // recommend:[]
     };
   },
   
   created(){
     // https://m.bd-ego.com/bd-product/api/categ/itemCategList?_t=1547285992369
     window.scrollTo(0,0);
-    var time = (new Date()).valueOf();
-			this.$axios.get(`http://localhost:2999/proxy/Liebiao?categId=2&_t=${time}`).then((res)=>{
-
-				let data = res.data;
-				// this.recommend = data.list;
-				console.log(data);
-			})
-			 .catch((err)=>{
-      console.log(err);
-    })
+    this.muying = goodstest.data;
+    // var time = (new Date()).valueOf();
+    // this.$axios.get(`http://localhost:2999/proxy/Liebiao?categId=2&_t=${time}`).then((res)=>{
+    //   let data = res.data;
+    //   // this.recommend = data.list;
+    //   console.log(data);
+    // })
+    // .catch((err)=>{
+    // console.log(err);
+    // })
   }
 };
 </script>
