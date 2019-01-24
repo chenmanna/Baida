@@ -66,18 +66,14 @@ export default {
 //             }
 //         }
     },
-    // created(){
-    //     this.getWindowScoll()
-    // },
-    // watch:{
-    // }
+    created(){
+        // console.log('GoodsList创建')
+        // this.getWindowScoll()
+    },
 }
 </script>
 <style lang="scss" scoped>
     .goodslist{
-        // width: 100%;
-        // overflow-y:auto;
-        // max-height: 100vh;
         margin-bottom : rem(84px);
         font-size: rem(14px);
         div{
@@ -91,7 +87,6 @@ export default {
             width: rem(750px);
             overflow-y:auto;
             max-height: 100vh;
-            // height: 100%;
             li{
                 width: rem(370.5px);
                 height: rem(550px);

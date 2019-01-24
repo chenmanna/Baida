@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    
     <Header />
     <!-- <Banner /> 
     <ConBanner />
@@ -39,9 +40,22 @@ export default {
   data(){
     return {
       // showSearchPage: false, 
-      showCon: true
+      showCon: true,
+      scrollTop: 0,
+      height: 0,
+      scroll: 0 
+      //==================================================
     }
   },
+   handleScroll () {
+       this.scroll  = document.documentElement &&  document.documentElement.scrollTop
+
+       console.log(this.scroll)
+     },
+     created(){
+       window.addEventListener('scroll', this.handleScroll);
+     },
+
   // methods:{
   //   isShowPage() {
   //     // this.hidden =! this.hidden;
@@ -72,9 +86,29 @@ export default {
   //     window.scrollTo(0,0);
   //   }
   // },
-  // created(){
-  //   window.addEventListener('scroll',this.showHight);
-  // }
+//   methods:{
+//     handelscroll() {
+//  　　　this.scrollTop = document.body.scrollTop|| document.documentElement.scrollTop || window.pageYOffset
+// 　　},
+//   },
+// ============================keep-alive(缓存不了)
+  deactivated(){
+　　sessionStorage.setItem('scrollTop',document.documentElement.scrollTop)     
+    console.log(document.documentElement.scrollTop,sessionStorage.getItem('scrollTop'))//0??
+　},
+  beforeRouteEnter(to, from, next) {
+    console.log('组件进入前')
+    if (from.name == "GoodsDetails") {  
+      next(vm=>{
+        window.scrollTo(0,sessionStorage.getItem('scrollTop'))
+         console.log(sessionStorage.getItem('scrollTop'))
+      })
+    } else {
+      window.scrollTo(0,0);
+    }
+   next();
+
+  },
 }
 </script>
 <style lang="scss" scoped>

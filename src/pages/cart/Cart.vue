@@ -136,11 +136,13 @@ export default {
     // 删除当前商品===
     delGoods(e){
       console.log(e.target)
+       var userName = sessionStorage.getItem('user');
       var currentId = e.target.parentNode.parentNode.parentNode.id;
       console.log(currentId);
       this.$axios.get('http://localhost:2999/changeGoods/delGood',
         {params: {    
-          currentId: currentId
+          currentId: currentId,
+          userName: userName
         }}
       )
       .then((res)=>{
@@ -196,6 +198,18 @@ export default {
       }
       return result;
     }
+  },
+  beforeRouteEnter(to,from,next){
+    next(vm => {
+        var userName = sessionStorage.getItem('user');
+        if(userName){
+          vm.noGoods = false;
+          vm.userGoods = true;
+        }else{
+          vm.noGoods = true;
+          vm.userGoods = false;
+        }
+    })
   },
   // 初始渲染请求===
   created(){

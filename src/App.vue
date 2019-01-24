@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <!-- <keep-alive :exclude="['GoodsList']" :include="['Home']" > keep-alive缓存-->
     <router-view/>
+    <!-- </keep-alive> -->
     <mt-tabbar v-model="selected" id="tabbar" v-if="$store.state.navShow">
       <mt-tab-item :id="tab.name" v-for="tab in tabs" :key="tab.name" @click.native="goto(tab.path)">
         <div :class="tab.icon" id="icon"></div>

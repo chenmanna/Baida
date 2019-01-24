@@ -137,13 +137,15 @@ Router.get('/reduceOne',(req,res)=>{
 Router.get('/delGood',(req,res)=>{
     res.append("Access-Control-Allow-Origin","*");
     console.log('cuowwwwwwwww')
-    let {currentId} = req.query;
+    let {currentId,userName} = req.query;
     console.log(currentId);
-    Goods.remove({_id: currentId})
+    Goods.deleteOne({_id: currentId})
     .then((data)=>{
-        Goods.find()
+        console.log('删除成功了呀!')
+        Goods.find({userName:userName})
         .then((data)=>{
             console.log(data,'daata22')
+            console.log('你确定删除成功了吗？？')
             res.send({err:0,msg:'删除成功',data:data})
         })
     })
