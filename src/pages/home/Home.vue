@@ -47,13 +47,14 @@ export default {
       //==================================================
     }
   },
-   handleScroll () {
-       this.scroll  = document.documentElement &&  document.documentElement.scrollTop
+  //  handleScroll () {
+  //      this.scroll  = document.documentElement &&  document.documentElement.scrollTop
 
-       console.log(this.scroll)
-     },
+  //      console.log(this.scroll)
+  //    },
      created(){
-       window.addEventListener('scroll', this.handleScroll);
+      //  window.addEventListener('scroll', this.handleScroll);
+      console.log('home创建')
      },
 
   // methods:{
@@ -91,24 +92,24 @@ export default {
 //  　　　this.scrollTop = document.body.scrollTop|| document.documentElement.scrollTop || window.pageYOffset
 // 　　},
 //   },
-// ============================keep-alive(缓存不了)
-  deactivated(){
-　　sessionStorage.setItem('scrollTop',document.documentElement.scrollTop)     
-    console.log(document.documentElement.scrollTop,sessionStorage.getItem('scrollTop'))//0??
-　},
-  beforeRouteEnter(to, from, next) {
-    console.log('组件进入前')
-    if (from.name == "GoodsDetails") {  
-      next(vm=>{
-        window.scrollTo(0,sessionStorage.getItem('scrollTop'))
-         console.log(sessionStorage.getItem('scrollTop'))
-      })
-    } else {
-      window.scrollTo(0,0);
-    }
-   next();
+// ============================deactivated(存储不到不了scrollTop)
+//   deactivated(){
+// 　　sessionStorage.setItem('scrollTop',document.documentElement.scrollTop)     
+//     console.log(document.documentElement.scrollTop,sessionStorage.getItem('scrollTop'),'home存储')//0??
+// 　},
+//   beforeRouteEnter(to, from, next) {
+//     console.log('组件进入前')
+//     if (from.name == "GoodsDetails") {  
+//       next(vm=>{
+//         window.scrollTo(0,sessionStorage.getItem('scrollTop'))
+//          console.log(sessionStorage.getItem('scrollTop'))
+//       })
+//     } else {
+//       window.scrollTo(0,0);
+//     }
+//    next();
 
-  },
+//   },
 }
 </script>
 <style lang="scss" scoped>

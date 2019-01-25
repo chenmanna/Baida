@@ -458,7 +458,7 @@
             text-align: left;
             margin-bottom: rem(120px);
             height: rem(184px);
-            width: rem(750px);
+            width: rem(730px);
             padding-left: rem(20px);
             p{
                 padding: 0;

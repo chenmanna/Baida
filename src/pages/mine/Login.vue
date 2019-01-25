@@ -1,6 +1,7 @@
 <template>
     <div class="login">
-        <img src="../../img/login1.jpg" alt="">
+        <!-- <img src="../../../static/img/login1.jpg"> -->
+        <img :src="img" alt="">
         <div class="loginCon">
             <div>
                 <span>手机</span>
@@ -21,13 +22,15 @@
     </div>    
 </template>
 <script>
+ var querystring = require('querystring');
 export default {
     name: 'Login',
     data(){
         return {
             phone: '',
             password: '',
-            isShow: false
+            isShow: false,
+            img: require('../../../static/img/login1.jpg')
         }
     },
     methods: {
@@ -56,6 +59,7 @@ export default {
          })
     },
     created(){
+        // var querystring = require('querystring');
         console.log(this.phone);
 
     }

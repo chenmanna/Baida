@@ -82,7 +82,7 @@ export default {
       position: relative;
       height: rem(450px);
       width: 100%;
-      background-image:url(../../img/bg_mine.png);
+      background-image:url(../../../static/img/bg_mine.png);
       background-repeat:no-repeat;
       background-size:100% 100%;
       // background:url(../../img/bg_mine.png);
@@ -106,7 +106,7 @@ export default {
           height: rem(140px);
           line-height: rem(140px);
           div{
-            background-image:url(../../img/allpyra_headimg.png);
+            background-image:url(../../../static/img/allpyra_headimg.png);
             background-repeat:no-repeat;
 
             background-size:100% 100%;
