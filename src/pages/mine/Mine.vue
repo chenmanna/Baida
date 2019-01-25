@@ -1,8 +1,8 @@
 <template>
   <div class="mine">
     <div class="mine-top">
-          <div class="mine-set"><span class="iconfont icon-shezhi"></span></div><div class="mine-info"><span class="iconfont icon-naoling"></span></div>
-          <div class="mine-tx"><div></div><span class="mine-name">用户名</span>{{userinfo}}</div>
+          <div class="mine-set"><span class="iconfont icon-shezhi"> </span></div><div class="mine-info"><span @click="tuichu" class="iconfont icon-naoling"></span></div>
+          <div class="mine-tx"><div></div><span class="mine-name">用户名:{{userinfo}}</span></div>
           <div class="mine-laba">
             <!-- <span class="iconfont icon-laba"> -->
               <!-- </span> -->
@@ -19,6 +19,8 @@
           <li><div class="mine-tb"><span class="iconfont icon-weibiaoti20101"></span></div><div class="mine-wz">待收货</div></li>
           <li><div class="mine-tb"><span class="iconfont icon-zhayan"></span></div><div class="mine-wz">已完成</div></li>
           <li><div class="mine-tb"><span class="iconfont icon-tuihuoshouhou"></span></div><div class="mine-wz">退款/售后</div></li>
+
+
         </ul>
     </div>
     <div class="mine-menu"> 
@@ -34,34 +36,39 @@
           <li><div class="mine-tb"><span class="iconfont icon-wode"></span></div><div class="mine-wz">邀请有奖</div></li>
           <li><div class="mine-tb"><span class="iconfont icon-qian"></span></div><div class="mine-wz">分享赚钱</div></li>
           <li><div class="mine-tb"><span class="iconfont icon-shangdian"></span></div><div class="mine-wz">易购门店</div></li>
+
+
           </ul>
     </div>
     <div class="del" @click="delUserinfo">退出登录</div>
     <div class="mine-foryou">
         为你推荐
     </div>
-    <GoodsList />
   </div>
 </template>
 
 <script>
-import GoodsList from '../home/components/GoodsList.vue'
 export default {
   name: 'Mine',
-  components:{GoodsList},
   data(){
     return {
-      userinfo: ''
+      userinfo: '',
+
     }
   },
-  // components: {
-  // },
+  components: {
+
+  },
   methods: {
     delUserinfo(){
       // sessionStorage.setItem('')
       sessionStorage.clear();
       console.log( sessionStorage.getItem('user'));
       this.$router.push('/home')
+    },
+    tuichu(){
+      // let dianjituichu =
+      
     }
   },
   created(){
@@ -69,20 +76,20 @@ export default {
     this.userinfo = sessionStorage.getItem('user')
   }
 }
+
 </script>
 <style lang="scss" scoped>
   .mine{
     .iconfont{
       font-size: rem(60px);
     }
-    // height: rem(1800px);
-    height: rem(1523px);
+    height: rem(1800px);
     background: #f4f4f4;
     .mine-top{
       position: relative;
       height: rem(450px);
       width: 100%;
-      background-image:url(../../../static/img/bg_mine.png);
+      background-image:url(../../img/bg_mine.png);
       background-repeat:no-repeat;
       background-size:100% 100%;
       // background:url(../../img/bg_mine.png);
@@ -106,7 +113,7 @@ export default {
           height: rem(140px);
           line-height: rem(140px);
           div{
-            background-image:url(../../../static/img/allpyra_headimg.png);
+            background-image:url(../../img/allpyra_headimg.png);
             background-repeat:no-repeat;
 
             background-size:100% 100%;

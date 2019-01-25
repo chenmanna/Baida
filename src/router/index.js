@@ -47,7 +47,7 @@ export default new Router({
           redirect:{name:'Fenlei'}
         },
         {
-          path:'Fenlei',//当url为/list/in_theaters匹配这个子路由
+          path:'Fenlei',//当url为匹配这个子路由
           name:'Fenlei',
           component:Fenlei,
           meta:{

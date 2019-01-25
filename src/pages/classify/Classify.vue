@@ -3,7 +3,7 @@
       <div>
       <mt-search 
         id="search1"
-        cancel-text="x"
+        cancel-text="取消"
         placeholder="搜索">
       </mt-search>
     </div>
@@ -41,21 +41,14 @@ export default {
     },
   name: 'Classify',
  
-  //  watch:{
-  //   //   selected(newValue,oldValue){
-  //   //       console.log(newValue,oldValue)
-  //   //   },
-  //     $route(newValue,oldValue){
-  //         console.log(newValue,oldValue)
-  //     }
-  // },
+  
    method:{
      goto(){
         this.$router.push({path:'/calssify/'+name})
      }
   },
   mounted(){
-      console.log(this.$route.params.type)
+      // console.log(this.$route.params.type)
   }
 };
 
@@ -75,22 +68,19 @@ export default {
 
 .classify{
     padding-top: 0px;
-    div .mint-search{
+    .mint-search{
     text-align: center;
     height: 100%;
     width:100%;
-         #search1 .mint-searchbar{
-            background-color: #fff;
-  }
+        
                   }
-     .mint-searchbar .mint-tab-item{
-        color:#999;
- }
-    .mint-navbar .mint-tab-item.is-selected{
-    color:red;
-    border-bottom: 3px solid red;
-  }
-
+   
+    .mint-navbar{ 
+      .mint-tab-item.is-selected{
+          color:red;
+          border-bottom: 3px solid red;
+        }
+}
   .fenlei{
     border-bottom:1px solid #999;
   }
@@ -133,4 +123,22 @@ export default {
   // .fenlei{
   //   border-bottom:1px solid #999;
   // }
+</style>
+<style>
+   .mint-searchbar{
+        /* padding: 0; */
+         background-color: #fff !important;
+
+             }
+    .mint-searchbar-cancel{
+      /* background: #f4f4f4; */
+      color:#999;
+      font-size: 18px;
+    }
+    .mint-searchbar-inner{
+      background: #e5e5e5;
+    }
+    .mint-searchbar-core{
+      background: #e5e5e5;
+    }
 </style>

@@ -38,8 +38,8 @@ app.get(apiProxy + "*",(req,res)=>{
     })
 
 // post请求============================================
-    // const bodyParser=require('body-parser')
-    // app.use(bodyParser.urlencoded({ extended: false}));
+    const bodyParser=require('body-parser')
+    app.use(bodyParser.urlencoded({ extended: false}));
     // var apiPost = '/proxyPost/';
     // var proxyApi = {
     //     HomeSearch: "/bd-product/api/item/searchItemList"
@@ -67,29 +67,30 @@ app.get(apiProxy + "*",(req,res)=>{
     //         // console.log(1,url);
     //     })
     // })
-// app.post('/post',function(req,res){
-//     res.append("Access-Control-Allow-Origin", "*");
-//     console.log(111111111111111,req);
-//     var url = "https://m.bd-ego.com/bd-product/api/item/searchItemList";
-//     request.post(url,(err,response,body)=>{
-//         console.log(req.url);
-//         res.send(body);
-//     })
-// })
+app.post('/post',function(req,res){
+    res.append("Access-Control-Allow-Origin", "*");
+    console.log(111111111111111,req);
+    var url = "https://m.bd-ego.com/bd-product/api/item/searchItemList";
+    request.post(url,(err,response,body)=>{
+        console.log(req.url);
+        res.send(body);
+    })
+})
 // =====================================================================
 
 //路由//连接数据库
 const db = require('./mongo/mongoose.js')
 const goods = require('./mongo/router/changeGoods')
-// const search = require('./mongo/router/searchGoods')
 // const uploadRouter=require('./src/router/upload.js')
 // const goodsRouter=require('./src/router/goods.js')
 
 //路由分发
 app.use('/changeGoods',goods)
-// app.use('/searchGoods',search)
 // app.use('/upload',uploadRouter)
 // app.use('/goods',goodsRouter)
+
+
+
 
 
 app.listen("2999",()=>{

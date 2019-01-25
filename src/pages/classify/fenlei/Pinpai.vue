@@ -31,7 +31,7 @@ export default {
 
 				let data = res.data.data;
 				this.recommend = data.list;
-				// console.log(this.recommend);
+				console.log(this.recommend);
 			})
 			 .catch((err)=>{
       console.log(err);

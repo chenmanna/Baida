@@ -1,15 +1,14 @@
 <template>
     <div class="login">
-        <!-- <img src="../../../static/img/login1.jpg"> -->
-        <img :src="img" alt="">
+        <img src="../../img/login1.jpg" alt="">
         <div class="loginCon">
             <div>
-                <span>手机</span>
+                <span>账号:</span>
                 <input type="text" v-model="phone">
             </div> 
             <div>
-                <span>密码</span>
-                <input type="text" v-model="password">
+                <span>密码:</span>
+                <input type="password" v-model="password">
             </div>
             <p><span class="phone">手机快速注册</span><span class="password">忘记密码？</span></p>
             <input type="button" value="登陆" class="button" @click="login">
@@ -22,15 +21,13 @@
     </div>    
 </template>
 <script>
- var querystring = require('querystring');
 export default {
     name: 'Login',
     data(){
         return {
             phone: '',
             password: '',
-            isShow: false,
-            img: require('../../../static/img/login1.jpg')
+            isShow: false
         }
     },
     methods: {
@@ -59,7 +56,6 @@ export default {
          })
     },
     created(){
-        // var querystring = require('querystring');
         console.log(this.phone);
 
     }
@@ -88,6 +84,11 @@ export default {
                 padding: rem(16px) 0 rem(16px) 0;
                 border-bottom: 1px solid #e5e5e5;
                 padding-left: rem(6px);
+                span{
+                    color:#000;
+                    font-size: rem(30px);
+
+                }
                 input{
                     margin-left: rem(16px);
                     width: rem(510px);
@@ -114,7 +115,10 @@ export default {
                 width: rem(650px);
                 height: rem(98px);
                 border: 0 none;
-                background: #fff;
+                border-radius: 2px;
+                background: #ff6700;
+                color:#fff;
+                font-size: rem(40px);
                 outline:medium;
             }
             .loginType{

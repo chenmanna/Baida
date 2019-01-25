@@ -136,11 +136,44 @@
         },
         showCar(){
             this.open = true;
+            // var user = sessionStorage.getItem('user');
+            // if (user) {
+            //     //自定义代码
+            //     console.log("用户已登录");
+            // }else{
+            //     console.log("用户未登录");
+            // }
         },
         showBuy(){
             this.open = true;
+            // 登录的用户名test=====
+            // sessionStorage.setItem('user', '用户名');
+            // var user = sessionStorage.getItem('user');//获取到的用户信息
+            // var user = 'testuser';
+            // if (user) {
+            //     //自定义代码
+            //     console.log("用户已登录");
+            //      this.$axios.get('http://localhost:2999/changeGoods/addGoods',{params: {
+            //         //  定义假数据
+            //         id: 111,
+            //         userName: user,
+            //         price: 666,
+            //         imgUrl: '..img..',
+            //         title: "测试数据"
+            //      }})
+            //      .then((res)=>{
+            //          console.log(res);
+            //      })
+            // }else{
+            //     // 显示未登录信息
+            //     console.log("用户未登录");
+            // }
         }, 
         addCar(){
+            // var user = 'testuser';
+            // var user = false;
+            // var user = 'aaa';
+            // console.log(this.$refs.qty.innerHTML)
             var buyNum = this.$refs.qty.innerHTML;
             var img = this.data.imageList[0];
             var username = sessionStorage.getItem('user');
@@ -224,6 +257,8 @@
              this.$axios.get(`http://localhost:2999/proxy/Goodsdetailsimg?_t=${time}`)
             .then((res)=>{
                console.log(111111111111111111111111,res);
+            //    this.bannerData = res.data.data;
+            //    console.log(this.bannerData)
             })
             .catch((err)=>{
                 console.log(err);
@@ -255,6 +290,7 @@
       window.scrollTo(0,0);
       this.getDetails();
       this.getBanerimg();
+    //   this.getImg();
     }
   }
 </script>
@@ -308,7 +344,8 @@
                 p{
                     padding: 0;
                 }
-            } 
+            }
+            
         }
         .confirm{
             height: rem(100px);
@@ -317,9 +354,10 @@
             background: #e72714;
             color: #fff;
             padding: 0;
-            font-size: rem(30px);
+            font-size:rem(30px);
         }
         .buyQty{
+            // float: left;
             width: 100%;
             line-height: rem(150px);
             div{
@@ -411,6 +449,7 @@
     }
     .specification{
         font-size: rem(16px);
+        // padding: 0;
         margin-left: rem(20px);
         margin-right: rem(20px);
         padding-top: rem(20px);
@@ -419,10 +458,13 @@
         height: 100%;
         div{
             padding: 0;
+            // height: rem(77px);
             background: #fff;
             margin-bottom: rem(20px);
             line-height: rem(70px);
             p{
+                // height: rem(30px);
+                // line-height: rem(30px);
                 padding: 0;
                 padding-top: rem(10px);
             }
@@ -458,11 +500,15 @@
             text-align: left;
             margin-bottom: rem(120px);
             height: rem(184px);
-            width: rem(730px);
+            width: rem(750px);
             padding-left: rem(20px);
             p{
+                // height: rem(50px);
+                // line-height: rem(50px);
                 padding: 0;
                 padding-top: rem(6px);
+                // padding-left: rem(200px)
+                // padding: rem(10px);
             }
         }
         .mt-tab-container{
@@ -483,6 +529,7 @@
                 width: rem(70px);
                 line-height: rem(96px);
                 text-align: center;
+                // height: rem(100px);
             }
            .buy{
                 width: rem(220px);
@@ -521,4 +568,9 @@
     }
   }
 }
+// .box .drawer .goodsbox[data-v-19ccd34a]{
+//     width: rem(170px);
+//     height: rem(170px);
+//     border: 1px solid #ccc;
+// }
 </style>

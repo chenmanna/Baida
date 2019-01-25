@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <!-- <keep-alive :exclude="['GoodsList']" :include="['Home']" > keep-alive缓存-->
+    <!--shell-->
     <router-view/>
-    <!-- </keep-alive> -->
     <mt-tabbar v-model="selected" id="tabbar" v-if="$store.state.navShow">
       <mt-tab-item :id="tab.name" v-for="tab in tabs" :key="tab.name" @click.native="goto(tab.path)">
         <div :class="tab.icon" id="icon"></div>
@@ -13,7 +12,8 @@
 </template>
 
 <script>
-
+import { MessageBox } from 'mint-ui';
+import goodstest from './muying.json'
 import axios from 'axios'
 import { Indicator } from 'mint-ui';
 // 请求拦截显示Indicator

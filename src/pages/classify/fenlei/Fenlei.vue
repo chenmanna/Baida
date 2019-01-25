@@ -37,39 +37,40 @@
       </div>
       <div class="fenlei_right">
           <ul>
-            <!-- <li><img src="http://st.allpyra.com/data/static/op/cic/ic_category_all_default.png?imageslim" alt=""> -->
-            <!-- <div>全部</div></li> -->
-            <li v-for="item in muying" :key="item.scid">
-              <img :src="item.logourl" alt="">
-              <div>{{item.categName}}</div>
-            </li>
+            <li v-for="item in muying" :key="item.scid"><img :src="item.logourl" alt="">
+            <div>{{item.categName}}</div></li>
+            
           </ul>
       </div>
   </div>
 </template>
 <script>
-import goodstest from '../../../muying.json'
+import goodstest from '../../../muying.json';
 export default { 
   name:'Fenlei',
   data() {
     return {
-      muying: []
+      muying:[],
       // recommend:[]
     };
   },
-  
+ 
   created(){
-    // https://m.bd-ego.com/bd-product/api/categ/itemCategList?_t=1547285992369
+    // https://m.bd-ego.com/bd-product/api/categ/itemCategList?_t=
+    //
+    this.muying =goodstest.data;
+    console.log(this.muying);
+
     window.scrollTo(0,0);
-    this.muying = goodstest.data;
     // var time = (new Date()).valueOf();
-    // this.$axios.get(`http://localhost:2999/proxy/Liebiao?categId=2&_t=${time}`).then((res)=>{
-    //   let data = res.data;
-    //   // this.recommend = data.list;
-    //   console.log(data);
-    // })
-    // .catch((err)=>{
-    // console.log(err);
+		// 	this.$axios.get(`http://localhost:2999/proxy/Liebiao?categId=1&_t=${time}`).then((res)=>{
+
+		// 		let data = res.data;
+		// 		// this.recommend = data.list;
+		// 		console.log(data);
+		// 	})
+		// 	 .catch((err)=>{
+    //   console.log(err);
     // })
   }
 };
@@ -113,17 +114,17 @@ export default {
       .fenlei_right{
         background:#fff;
         text-align: center;
-        width: rem(600px);
+        width: rem(610px);
         height: rem(1300px);
         float: left;
         ul{
-          margin-top: 10px;
-          margin-left: 10px;
+          margin-top: rem(40px);
+          margin-left: rem(30px);
         }
         ul li{
           height: rem(180px);
           width: rem(160px);
-          margin-bottom: rem(30px);
+          margin-bottom: rem(36px);
           float: left;
           img{
             width:rem(100px) ;
